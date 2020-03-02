@@ -1,0 +1,84 @@
+
+<div  *ngIf="bandera">
+    <div class="pageheader-content row">
+        <div class="col-full">
+
+            <div class="featured">
+
+                <div class="featured__column featured__column--big" >
+                    <div class="entry"  [ngStyle]="{'background-image': 'url(' + (postLateral.images | imageT : 0 )+')'}" >
+                        <!-- [style]="background-image:url('postLateral.images| imageT : 1);" -->
+                        <div class="entry__content">
+                            <span class="entry__category"><a href="#0">{{ postLateral.keywords |  slice }}</a></span>
+  
+                            <h1><a href="#0" title="">{{ postLateral.title}}</a></h1>
+
+                            <div class="entry__info">
+                                <a href="#0" class="entry__profile-pic">
+                                    <img class="avatar" [src]="postLateral.images| imageT : 1" alt="">
+                                </a>
+
+                                <ul class="entry__meta">
+                                    <li><a href="#0">John Doe</a></li>
+                                    <li>December 29, 2017</li>
+                                </ul>
+                            </div>
+                        </div> <!-- end entry__content -->
+                        
+                    </div> <!-- end entry -->
+                </div> <!-- end featured__big -->
+
+                <div class="featured__column featured__column--small">
+
+                    <div class="entry" *ngFor="let post of posts"  [ngStyle]="{'background-image': 'url(' + (post.images | imageT : 0 )+')'}">
+                        
+                        <div class="entry__content">
+                            <span class="entry__category"><a href="#0">{{ post.keywords | slice:0}}</a></span>
+
+                            <h1><a href="#0" title="">{{post.title}}</a></h1>
+
+                            <div class="entry__info">
+                                <a href="#0" class="entry__profile-pic">
+                                    <img class="avatar" src="assets/images/avatars/user-03.jpg" alt="">
+                                </a>
+
+                                <ul class="entry__meta">
+                                    <li><a href="#0"> {{post.autor}}</a></li>
+                                    <li>{{post.fechaPublicacion}}</li>
+                                </ul>
+                            </div>
+                        </div> <!-- end entry__content -->
+                      
+                    </div> <!-- end entry -->
+
+                    <!-- <div class="entry" style="background-image:url('assets/images/thumbs/featured/featured-beetle.jpg');">
+
+                        <div class="entry__content">
+                            <span class="entry__category"><a href="#0">LifeStyle</a></span>
+
+                            <h1><a href="#0" title="">Throwback To The Good Old Days.</a></h1>
+
+                            <div class="entry__info">
+                                <a href="#0" class="entry__profile-pic">
+                                    <img class="avatar" src="assets/images/avatars/user-03.jpg" alt="">
+                                </a>
+
+                                <ul class="entry__meta">
+                                    <li><a href="#0">John Doe</a></li>
+                                    <li>December 21, 2017</li>
+                                </ul>
+                            </div>
+                        </div> <!-- end entry__content -->
+
+                    <!-- </div>   -->
+                   -->
+                    <!-- end entry -->
+
+                </div> <!-- end featured__small -->
+            </div> <!-- end featured -->
+
+        </div> <!-- end col-full -->
+    </div> <!-- end pageheader-content row -->
+
+</div>
+   

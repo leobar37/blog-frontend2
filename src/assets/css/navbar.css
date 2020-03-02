@@ -1,0 +1,528 @@
+@import 'https://fonts.googleapis.com/css?family=Raleway';
+/* 
+html, body
+{
+    margin: 0px;
+} */
+
+
+.navs h1
+{
+    color: #AAA;
+    font-size: 40px;
+    font-weight: lighter;
+    /* margin-bottom: 5px; */
+
+}
+
+.navs span
+{
+    color: #222;
+}
+
+.navs span
+{
+  color: #AAA;
+}
+
+/* .navs .contNav
+{
+    font-family: Raleway;
+    margin: 0 auto;
+	padding: 2rem 1rem;
+	text-align: center;
+} */
+.navs{
+  padding: 1.5rem 0rem;
+  font-family: Raleway;
+  text-align: center;
+  margin: 1rem 0!important;
+  background: transparent;
+}
+
+.navs .contNav a
+{
+    color: #FFF;
+    text-decoration: none;
+    font: 2rem Raleway;
+    margin: 0px 10px;
+    padding: 10px 10px;
+    position: relative;
+    z-index: 0;
+    cursor: pointer;
+}
+
+.red
+{
+    background: #f44336;
+}
+
+.purple
+{
+    background: #673ab7;
+}
+
+.indigo
+{
+    background: #3f51b5;
+}
+
+.blue
+{
+    background: #2196f3;
+}
+
+.cyan
+{
+    background: #00bcd4;
+}
+
+.teal
+{
+    background: #009688;
+}
+
+.green
+{
+    background: #4caf50;
+}
+
+.lightGreen
+{
+    background: #8bc34a;
+}
+
+.lime
+{
+    background: #c0ca33;
+}
+
+.yellow
+{
+    background: #fdd835;
+}
+
+.amber
+{
+    background: #ffc107;
+}
+
+.orange
+{
+    background: #ff9800
+}
+
+.deepOrange
+{
+    background: #ff5722;
+}
+
+.brown
+{
+    background: #795548;
+}
+
+.gray
+{
+    background: #9e9e9e;
+}
+.tranparent{
+     background: transparent;
+}
+
+/* Top and Bottom borders go out */
+.navs .topBotomBordersOut a:before, .navs .topBotomBordersOut a:after
+{
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    height: 2px;
+    background: #FFF;
+    content: "";
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.navs .topBotomBordersOut a:before
+{
+    top: 0px;
+    transform: translateY(10px);
+}
+
+.navs .topBotomBordersOut a:after
+{
+    bottom: 0px;
+    transform: translateY(-10px);
+}
+
+.navs .topBotomBordersOut a:hover:before, .navs .topBotomBordersOut a:hover:after
+{
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+/* Top and Bottom borders come in */
+.navs .topBotomBordersIn a:before, .navs .topBotomBordersIn a:after
+{
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    height: 2px;
+    background: #FFF;
+    content: "";
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.navs .topBotomBordersIn a:before
+{
+    top: 0px;
+    transform: translateY(-10px);
+}
+
+.navs .topBotomBordersIn a:after
+{
+    bottom: 0px;
+    transform: translateY(10px);
+}
+
+.navs .topBotomBordersIn a:hover:before, .navs .topBotomBordersIn a:hover:after
+{
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+/* Top border go down and Left border appears */
+.navs .topLeftBorders a:before
+{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 2px;
+    height: 0px;
+    background: #FFF;
+    content: "";
+    opacity: 1;
+    transition: all 0.3s;
+}
+
+.navs .topLeftBorders a:after
+{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 2px;
+    background: #FFF;
+    content: "";
+    opacity: 1;
+    transition: all 0.3s;
+}
+
+.navs .topLeftBorders a:hover:before
+{
+    height: 100%;
+}
+
+.navs .topLeftBorders a:hover:after
+{
+    opacity: 0;
+    top: 100%;
+}
+
+/* Circle behind */
+.navs .circleBehind a:before, .navs .circleBehind a:after
+{
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    border: 4px solid white;
+    transform: translateX(-50%) translateY(-50%) scale(0.8);
+    border-radius: 50%;
+    background: transparent;
+    content: "";
+    opacity: 0;
+    transition: all 0.3s;
+    z-index: -1;
+}
+
+.navs .circleBehind a:after
+{
+    border-width: 2px;
+    transition: all 0.4s;
+}
+
+.navs .circleBehind a:hover:before
+{
+    opacity: 1;
+    transform: translateX(-50%) translateY(-50%) scale(1);
+}
+
+.navs .circleBehind a:hover:after
+{
+    opacity: 1;
+    transform: translateX(-50%) translateY(-50%) scale(1.3);
+}
+
+/* Brackets go out */
+.navs .brackets a:before, .navs .brackets a:after
+{
+    position: absolute;
+    opacity: 0;
+    font-size: 35px;
+    top: 0px;
+    transition: all 0.3s;
+}
+
+.navs .brackets a:before
+{
+    content: '(';
+    left: 0px;
+    transform: translateX(10px);
+}
+
+.navs .brackets a:after
+{
+    content: ')';
+    right: 0px;
+    transform: translateX(-10px);
+}
+
+.navs .brackets a:hover:before, .navs .brackets a:hover:after
+{
+    opacity: 1;
+    transform: translateX(0px);
+}
+
+
+/* Border from Y to X  */
+.navs .borderYtoX a:before, .navs .borderYtoX a:after
+{
+    position: absolute;
+    opacity: 0.5;
+    height: 100%;
+    width: 2px;
+    content: '';
+    background: #FFF;
+    transition: all 0.2s;
+}
+
+.navs .borderYtoX a:before
+{
+    left: 0px;
+    top: 0px;
+}
+
+.navs .borderYtoX a:after
+{
+    right: 0px;
+    bottom: 0px;
+}
+
+.navs .borderYtoX a:hover:before, .navs .borderYtoX a:hover:after
+{
+    opacity: 1;
+    height: 2px;
+    width: 100%;
+}
+
+/* Border X get width  */
+.navs .borderXwidth a:before, .navs .borderXwidth a:after
+{
+    position: absolute;
+    opacity: 0;
+    width: 0%;
+    height: 2px;
+    content: '';
+    background: #FFF;
+    transition: all 0.3s;
+}
+
+.navs .borderXwidth a:before
+{
+    left: 0px;
+    top: 0px;
+}
+
+.navs .borderXwidth a:after
+{
+    right: 0px;
+    bottom: 0px;
+}
+
+.navs .borderXwidth a:hover:before, .navs .borderXwidth a:hover:after
+{
+    opacity: 1;
+    width: 100%;
+}
+
+/* Pull down  */
+.navs .pullDown a:before
+{
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    left: 0px;
+    top: 0px;
+    content: '';
+    background: #FFF;
+    opacity: 0.3;
+    transition: all 0.3s;
+}
+
+.navs .pullDown a:hover:before
+{
+    height: 100%;
+}
+
+/* Pull up  */
+.navs .pullUp a:before
+{
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    left: 0px;
+    bottom: 0px;
+    content: '';
+    background: #FFF;
+    opacity: 0.3;
+    transition: all 0.3s;
+}
+
+.navs .pullUp a:hover:before
+{
+    height: 100%;
+}
+
+/* Pull right  */
+.navs .pullRight a:before
+{
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    content: '';
+    background: #FFF;
+    opacity: 0.3;
+    transition: all 0.3s;
+}
+
+.navs .pullRight a:hover:before
+{
+    width: 100%;
+}
+
+/* Pull left  */
+.navs .pullLeft a:before
+{
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    right: 0px;
+    top: 0px;
+    content: '';
+    background: #FFF;
+    opacity: 0.3;
+    transition: all 0.3s;
+}
+
+.navs .pullLeft a:hover:before
+{
+    width: 100%;
+}
+
+/* Pull up and down  */
+.navs .pullUpDown a:before, .navs .pullUpDown a:after
+{
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    left: 0px;
+    content: '';
+    background: #FFF;
+    opacity: 0.3;
+    transition: all 0.3s;
+}
+
+.navs .pullUpDown a:before
+{
+    top: 0px;
+} 
+
+.navs .pullUpDown a:after
+{
+    bottom: 0px;
+}
+
+.navs .pullUpDown a:hover:before, .navs .pullUpDown a:hover:after
+{
+    height: 100%;
+}
+
+/* Pull right and left  */
+.navs .pullRightLeft a:before, .navs .pullRightLeft a:after
+{
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    top: 0px;
+    content: '';
+    background: #FFF;
+    opacity: 0.3;
+    transition: all 0.3s;
+}
+
+.navs .pullRightLeft a:before
+{
+    left: 0px;
+} 
+
+.navs .pullRightLeft a:after
+{
+    right: 0px;
+}
+
+.navs .pullRightLeft a:hover:before, .navs .pullRightLeft a:hover:after
+{
+    width: 100%;
+}
+
+/* Highlight text out  */
+.navs .highlightTextOut a
+{
+    color: rgba(255, 255, 255, 0.3); 
+}
+
+.navs .highlightTextOut a:before, .navs .highlightTextIn a:before
+{
+    position: absolute;
+    color: #FFF;
+    top: 0px;
+    left: 0px;
+    padding: 10px;
+    overflow: hidden;
+    content: attr(alt);
+    transition: all 0.3s;
+    transform: scale(0.8);
+    opacity: 0;
+} 
+
+.navs .highlightTextOut a:hover:before, .navs .highlightTextIn a:hover:before
+{
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Highlight text in  */
+.navs .highlightTextIn a
+{
+    color: rgba(0, 0, 0, 0.4); 
+}
+
+.navs .highlightTextIn a:before
+{
+    transform: scale(1.2);
+} 
