@@ -25,19 +25,27 @@
             ],
             "styles": [
               "src/styles.css",
+              "src/assets/plugins/bootstrap/css/bootstrap.min.css"
               
             ],
             "scripts": [
-              
-              "src/assets/js/jquery-3.2.1.min.js",
+              "src/assets/plugins/jquery/jquery.min.js",
               "src/assets/js/plugins.js",
               "src/assets/js/pace.min.js",
               "src/assets/js/modernizr.js",
-             
-              "src/assets/js/main.js"
-
+              "src/assets/js/perfect-scrollbar.jquery.min.js",
+              "src/assets/plugins/bootstrap/js/bootstrap.min.js",
+              "src/assets/plugins/bootstrap/js/popper.min.js",
+               "src/assets/js/sidebarmenu.js",
+               "src/assets/js/waves.js",
+               "src/assets/plugins/styleswitcher/jQuery.style.switcher.js",
+               "src/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js",
+               "src/assets/plugins/sparkline/jquery.sparkline.min.js",       
+               "src/assets/js/custom.js"
             ]
+            
           },
+
           "configurations": {
             "production": {
               "fileReplacements": [
