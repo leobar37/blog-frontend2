@@ -10,6 +10,19 @@ export interface IPost {
     keywords? : string[]
     tipoblog ? : number
 }
+export interface IEntrada {
+    images ? :string[],
+    visible?:boolean,
+    _id ?: string,
+    titulo :string,
+    body ? :string,
+    extracto?:string,
+    autor :string,
+    fecha : string,
+    keywords? : string[]
+    tipo ? : number,
+    categoria ?: string
+}
 
 export interface IData{
    ok:boolean,

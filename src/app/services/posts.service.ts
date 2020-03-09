@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient , HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { URLBACKEND } from '../keywords/constants';
-import { IPost, IData } from '../models/blog.interfaces';
+import { IPost, IData, IEntrada } from '../models/blog.interfaces';
 
 
 
@@ -34,12 +34,13 @@ export class BloApiService {
      }));
   }
   getPost(id :string){
-
      return this.http.get(`${URLBACKEND}/entrada/${id}`)
      .pipe(map( (data:IData) =>{
-  
-          
      }));
+  }
+  crearEntrada(entrada : IEntrada){
+     let url =  URLBACKEND + '/entrada';
+    return this.http.post(url ,  entrada );
   }
 
 //   uploadImage(id, body){

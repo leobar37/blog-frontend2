@@ -9,6 +9,25 @@ import { PostsComponent } from './pages/posts/posts.component';
 import { RUTASPRIVATE } from './rutas.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
+//editor
+// Import all Froala Editor plugins.
+import 'froala-editor/js/plugins.pkgd.min.js';
+
+// Import a single Froala Editor plugin.
+import 'froala-editor/js/plugins/align.min.js';
+
+// Import a Froala Editor language file.
+import 'froala-editor/js/languages/de.js';
+
+// Import a third-party plugin.
+import 'froala-editor/js/third_party/font_awesome.min';
+import 'froala-editor/js/third_party/image_tui.min';
+import 'froala-editor/js/third_party/spell_checker.min';
+import 'froala-editor/js/third_party/embedly.min';
+
+// Import Angular plugin.
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,10 +38,12 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     BreadcrumbsComponent,
     SubirPostComponent,
     PostsComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
+    FormsModule,
     CommonModule,
+    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),
     RUTASPRIVATE
   ]
 })

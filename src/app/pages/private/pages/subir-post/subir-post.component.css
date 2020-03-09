@@ -1,0 +1,13 @@
+
+.titulo{
+     font-size: 1.5rem;
+     width: 50%;
+     padding-bottom: 15px;
+     border-bottom: 4px solid black;
+     margin-bottom: 1rem;
+}
+
+.tag{
+     padding: 0.8rem 0.4rem;
+     margin: 0 0.2rem;
+}

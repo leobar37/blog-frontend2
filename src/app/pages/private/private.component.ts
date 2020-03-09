@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject,  } from '@angular/core';
-import { cargarScripts, cargarEstilo, eliminarScript } from '../../controllers/scripts';
+import { cargarScripts, cargarEstilo, eliminarScript, cargarScript } from '../../controllers/scripts';
 import { scriptsAdminPro } from '../../keywords/constants';
 import { DOCUMENT } from '@angular/common';
 
@@ -9,9 +9,13 @@ declare function adminPro() ;
   templateUrl: './private.component.html', 
 })
 export class PrivateComponent implements OnInit {
+
   constructor( @Inject(DOCUMENT) private  doc : Document) {
   cargarEstilo('assets/css/style.css');
-  cargarEstilo('assets/css/colors/default-dark.css')
+  cargarEstilo('assets/css/colors/default-dark.css');
+ 
+
+  
   }
   ngOnInit() {
     // cargarEstilo('assets/css/style.css')
