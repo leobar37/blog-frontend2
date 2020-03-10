@@ -1,5 +1,10 @@
 export interface IPost {
-    images ? :string[],
+    images ? : [ 
+        {
+            imagenes?: string[],
+             _id: string 
+        },
+    ]
     visible?:boolean,
     _id ?: string,
     title :string,
@@ -18,7 +23,7 @@ export interface IEntrada {
     body ? :string,
     extracto?:string,
     autor :string,
-    fecha : string,
+    fecha?: string,
     keywords? : string[]
     tipo ? : number,
     categoria ?: string

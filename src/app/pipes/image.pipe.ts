@@ -10,9 +10,7 @@ export class ImagePipe implements PipeTransform {
     
     let ruta =  URLBACKEND ;    
     if(image.length == 0){
-      
       ruta = `${ruta}/uploads/${tipo}/rdsasa`;
-      
       return ruta;;
     }
     switch(tipo){
@@ -26,10 +24,7 @@ export class ImagePipe implements PipeTransform {
             ruta =  `${ruta}+/uploads/${tipo}/rdsasa` 
            break;
     }
-    console.log(ruta);
-    
     return ruta;
-    
   }
 
 }

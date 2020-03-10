@@ -1,0 +1,70 @@
+
+.titulo{
+    font-size: 1.1rem;
+    width: 20%;
+    padding-bottom: 4px;
+    border-bottom: 2px solid black;
+    margin-bottom: 1rem;
+}
+
+.tag{
+    padding: 0.8rem 0.4rem;
+    margin: 0 0.2rem;
+}
+.inputfile + label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.5rem  1rem;
+    color: white;
+    background-color: #242A33;
+    display: inline-block;
+    border: 2px solid transparent;
+    border-radius:10%;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: white;
+    color: #242A33;
+    border: 2px solid #242A33;
+}
+.inputfile {
+    width: 4px;
+   height: 3px;
+    opacity: 0;
+   
+   overflow: hidden;
+   position: absolute;
+   z-index: -1;
+}
+.inputfile + label {
+   cursor: pointer; /* "hand" cursor */
+}
+.inputfile:focus + label {
+   outline: 1px dotted #000;
+   outline: -webkit-focus-ring-color auto 5px;
+}
+.inputfile + label * {
+   pointer-events: none;
+}
+.image {
+    width: 300px;
+    /* height: 60vh; */
+    overflow: hidden;
+}
+
+a :hover{
+ cursor: pointer;
+}
+.galery{
+  padding-top: 5rem;   
+}
+
+.itm{
+    width: 50%;
+    /* height: 12vh; */
+}
+.carousel-control-prev,
+.carousel-control-next{
+     background: #000;
+}

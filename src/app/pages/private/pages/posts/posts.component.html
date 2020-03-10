@@ -19,10 +19,15 @@
                                 <div class="progress-bar bg-danger" style="width: 35%; height:6px;"></div>
                             </div>
                         </td>
-                        <td>May 15, 2015</td>
+                        <td>{{post.fechaPublicacion}}</td>
                         <td class="text-nowrap">
-                            <a data-toggle="tooltip" data-original-title="editar posts"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                            <a data-toggle="tooltip" (click)="eliminarPost(post._id)" data-original-title="eliminar el post"> <i class="fa fa-close text-danger"></i> </a>
+                              
+                            <a data-toggle="tooltip"
+                            [routerLink]="[ '/pr', 'editpost' , post._id]"  
+                            data-original-title="editar posts"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                            <a data-toggle="tooltip"
+                              
+                            (click)="eliminarPost(post._id)" data-original-title="eliminar el post"> <i class="fa fa-close text-danger"></i> </a>
                         </td>
                     </tr>
              

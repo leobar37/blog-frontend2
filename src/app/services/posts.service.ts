@@ -36,10 +36,8 @@ export class BloApiService {
   }
   getPost(id :string){
      return this.http.get(`${URLBACKEND}/entrada/${id}`)
-     .pipe(map( (data:IData) =>{
-         console.log('primera data');
-          console.log(data);
-                 
+     .pipe(map( (data) =>{
+        return  data;
     }));
   }
   crearEntrada(entrada : IEntrada){
@@ -63,5 +61,20 @@ export class BloApiService {
       let url =  URLBACKEND + '/entrada/'+id; 
       return this.http.delete(url);
     }
+    editarEntrada(id:string , entrada : IEntrada){
+      let url =  URLBACKEND + '/entrada/'+id; 
+      return this.http.put(url , entrada);
+    } 
+    editarImagenesPost(idImagen:string , imagenes:File[] , tamaño ?: string , importancia?:string){
+      let url =  URLBACKEND + '/upload/imgs/'+idImagen;
+      let formData = new FormData();
+      for (const imagen of imagenes) {
+        formData.append('imagenes', imagen);
+      }
+      formData.append('tamaño' , '300*300');
+      formData.append('importancia', 'prueba');
+
+      return  this.http.put(url, formData);    
   
+    }
 }

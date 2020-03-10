@@ -12,17 +12,15 @@ export const scriptsAdminPro: string[] =
      "assets/js/waves.js",
      "assets/plugins/styleswitcher/jQuery.style.switcher.js",
      "assets/plugins/sticky-kit-master/dist/sticky-kit.min.js",
-     "assets/plugins/sparkline/jquery.sparkline.min.js"
-     
+     "assets/plugins/sparkline/jquery.sparkline.min.js",
+     "assets/plugins/Magnific-Popup-master/dist/jquery.magnific-popup.min.js",
+     "assets/plugins/Magnific-Popup-master/dist/jquery.magnific-popup-init.js"
      
     //   "assets/js/custom.js"
     ]
 
-    export const scriptsPost : string[] = [
-
-        "assets/plugins/Magnific-Popup-master/dist/jquery.magnific-popup.min.js",
-        "assets/plugins/Magnific-Popup-master/dist/jquery.magnific-popup-init.js",
-        "assets/plugins/bootstrap/css/bootstrap.min.css"
+    export const scriptsPost : string[] = [        ,
+        // "assets/plugins/bootstrap/css/bootstrap.min.css"
     ]
     
     /*

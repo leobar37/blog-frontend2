@@ -19,7 +19,7 @@ export class PostsComponent implements OnInit {
   }
   llenarPosts(){
     this._blog.getPosts(5).subscribe( data=>{
-      console.log(data);
+      
        this.posts =  data;
     });
   }

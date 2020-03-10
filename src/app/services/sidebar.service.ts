@@ -12,7 +12,8 @@ export class SidebarService {
          items: [
             { title: "nuevo Post", url : 'newpost'},
             { title: "mis posts",  url : 'posts'},
-            { title: "dashboard" , url :'dashboard'}
+            { title: "dashboard" , url :'dashboard'},
+            
          ]
      }
   ]

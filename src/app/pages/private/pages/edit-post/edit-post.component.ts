@@ -1,24 +1,24 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit , OnDestroy } from '@angular/core';
+import { BloApiService } from '../../../../services/posts.service';
+import { cargarEstilo, cargarScripts, elimarPertenencias, imgToBase64 ,  getArchivo } from 'src/app/controllers/scripts';
+import { scriptsPost, URLBACKEND } from '../../../../keywords/constants';
+import { IEntrada, IPost, IrptaEntrada } from '../../../../models/blog.interfaces';
 
-import { cargarEstilo, cargarScripts, cargarScript } from '../../../../controllers/scripts';
-import { scriptsPost } from 'src/app/keywords/constants';
-import { BloApiService } from 'src/app/services/posts.service';
-import {  IEntrada, IrptaEntrada } from 'src/app/models/blog.interfaces';
-import   Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
+import { Router , ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { IPost } from '../../../../models/blog.interfaces';
-import { URLBACKEND } from '../../../../keywords/constants';
-import { elimarPertenencias } from 'src/app/controllers/scripts';
 declare var $:any;
 interface HtmlElement extends Event{
   target : HTMLInputElement & EventTarget;
 }
 @Component({
-  selector: 'app-subir-post',
-  templateUrl: './subir-post.component.html',
-  styleUrls: ['./subir-post.component.css']
+  selector: 'app-edit-post',
+  templateUrl: './edit-post.component.html',
+  styleUrls: ['./edit-post.component.css']
 })
-export class SubirPostComponent implements OnInit  , OnDestroy {
+
+export class EditPostComponent implements OnInit ,  OnDestroy{
+   postBd : IPost ; 
   load :boolean  = false;
   imagenes :(ArrayBuffer | string) [] = []
   file : File;
@@ -81,27 +81,60 @@ export class SubirPostComponent implements OnInit  , OnDestroy {
       }
     } ,
     imageResizeWithPercent : true,
- 
+    events : {
+      'froalaEditor.focus' : function(e , editor) {
+        console.log(editor.selection.get());
+      },
+      events: {
+        "initialized": () => {
+          console.log('initialized');
+        },
+        "contentChanged": () => {
+          console.log("content changed");
+        }
+      }
+    },
   }
+  
   public extracto : string  = "";
   public editorContent: string = "";
-  constructor(private _blog:BloApiService) {
-     cargarEstilo('assets/plugins/Magnific-Popup-master/dist/magnific-popup.css', 'subpost');
-     cargarEstilo('assets/css/pages/user-card.css', 'subpost');
-     cargarEstilo('assets/css/pages/floating-label.css', 'subpost')
-     cargarScripts(scriptsPost , 'subpost');
+  constructor(private _blog:BloApiService, 
+     private router : Router,
+      private activ:ActivatedRoute) {
+     cargarEstilo('assets/plugins/Magnific-Popup-master/dist/magnific-popup.css' , 'epost');
+     cargarEstilo('assets/css/pages/user-card.css' , 'epost');
+     cargarEstilo('assets/css/pages/floating-label.css' , 'epost')
+     cargarScripts(scriptsPost , 'epost');
      let url = URLBACKEND +  '/uploads/tipo/nameImage';
+      activ.params.subscribe( params=>{
+          const  {  id }  = params;
+           this._blog.getPost(id).subscribe( (data: any) =>{
+               if(!data){ 
+               }else{
+                 this.postBd =  data.entrada;             
+                   this.imagenes =  this.transformarImagenes(this.postBd.images[0].imagenes);
+                   this.titulo =  this.postBd.title;
+                   this.extracto =  this.postBd.extracto;
+                   this.editorContent =  this.postBd.body;
+                   this.tags =  this.postBd.keywords;
+               }
+           }); 
+           
+      }) 
+      
      this.imagenes.push(url);
+     
   }
   
   ngOnInit() {    
     this.load = true;
     $('#carousel').carousel()
   }
-  ngOnDestroy(){
-     elimarPertenencias('subpost');
-  }
+ ngOnDestroy(){
+     elimarPertenencias('epost'); 
+ }
   guardarContenido(){
+
    let observable = new Observable(observer=>{
      let valor : boolean  =  this.titulo == '' || this.editorContent.length <  150 ||  this.extracto.length < 80  || this.tags.length < 2 ; 
       observer.next('verificando errores')
@@ -115,20 +148,21 @@ export class SubirPostComponent implements OnInit  , OnDestroy {
           autor : '5e61d03af5454a398022e385'
        }  
        observer.next('guardando datos');
-       this._blog.crearEntrada(this.post).subscribe((resp:IrptaEntrada) =>{
+       this._blog.editarEntrada(  this.postBd._id , this.post).subscribe((resp:IrptaEntrada) =>{
          if(resp.ok){
           let post : IPost = resp.entrada;
           console.log(resp);
           observer.next('datos correctamente guardados texto');
           observer.next('guardando imagenes');
-          this._blog.subirImagenesPost(post._id ,  this.files).subscribe( (resp :any) =>{
+          //por corregir
+          this._blog.editarImagenesPost(this.postBd.images[0]._id , this.files).subscribe( (resp :any) =>{
               if(resp.ok){
                  observer.next('imagenes guardadas correctamente');
               }else{
                  observer.error('errr'+resp.error);
               }
           })
-          observer.next('se agreo correctamente el post : '+ post.title);
+          observer.next('se actualizo correctamente el post : '+ post.title);
           observer.complete();
           //subir imagenes
          }else{
@@ -152,7 +186,7 @@ export class SubirPostComponent implements OnInit  , OnDestroy {
       Swal.isLoading();
     }, (err: string) =>{ 
       Swal.fire({
-        title :'procesando datos',
+        title :'ups...6',
         text :  err ,
         icon : 'error'
       })  
@@ -186,8 +220,6 @@ export class SubirPostComponent implements OnInit  , OnDestroy {
         reader.onload =  (event)=>{
            let image:ArrayBuffer | string = reader.result;
            this.imagenes.push(image);
-           console.log(this.file);
-           
            this.files.push(this.file);
         }
         reader.readAsDataURL(this.file);
@@ -195,7 +227,7 @@ export class SubirPostComponent implements OnInit  , OnDestroy {
     }
   }
   eliminarImagen(img:string){
-    if( img == URLBACKEND +  '/uploads/tipo/nameImage'){
+     if( img == URLBACKEND +  '/uploads/tipo/nameImage'){
       //  console.log('aqui');
       return;
      }
@@ -210,10 +242,28 @@ export class SubirPostComponent implements OnInit  , OnDestroy {
   }
   
   eliminarTag(tag:string){
+    
      this.tags = this.tags.filter( tagP =>{
         return tagP != tag ;
      })
   }
+  transformarImagenes(imagenes :string[]): (ArrayBuffer | string) []{
+    let ruta;
+    let files:File[] = [];
+    let imgs:(ArrayBuffer | string) []   = [];
+    for (const image of imagenes) {
+       ruta =`${URLBACKEND}/uploads/posts/${image}`
+       imgToBase64(ruta,  (base64)=>{
+         imgs.push(base64);
+         files.push(getArchivo(base64 , image.split('.')[0]))
+       })
+    } 
+    this.files =  files;
+    console.log(this.files);
+    console.log(imgs);
+    return imgs;
+ 
+    
+    
+  }
 }
-
-

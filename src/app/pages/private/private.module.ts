@@ -29,6 +29,8 @@ import 'froala-editor/js/third_party/embedly.min';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { FormsModule } from '@angular/forms';
 import { ImagePipe } from '../../pipes/image.pipe';
+import { RouterModule } from '@angular/router';
+import { EditPostComponent } from './pages/edit-post/edit-post.component';
 
 
 @NgModule({
@@ -40,13 +42,15 @@ import { ImagePipe } from '../../pipes/image.pipe';
     SubirPostComponent,
     PostsComponent,
     DashboardComponent,
-    ImagePipe
+    ImagePipe,
+    EditPostComponent
   ],
   imports: [
     FormsModule,
     CommonModule,
     FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),
-    RUTASPRIVATE
+    RUTASPRIVATE,
+    RouterModule
   ]
 })
 export class PrivateModule { }
