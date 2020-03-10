@@ -29,4 +29,7 @@ export interface IData{
    docs : IPost[];
 }
   
-  
+export interface IrptaEntrada{
+     ok : boolean,
+     entrada ?:IPost,
+}

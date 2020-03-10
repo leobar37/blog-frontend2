@@ -10,9 +10,11 @@ import { BloApiService } from './services/posts.service';
 
 import { PrivateModule } from './pages/private/private.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,
+
 
 
   ],

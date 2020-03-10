@@ -28,6 +28,7 @@ import 'froala-editor/js/third_party/embedly.min';
 // Import Angular plugin.
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { FormsModule } from '@angular/forms';
+import { ImagePipe } from '../../pipes/image.pipe';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { FormsModule } from '@angular/forms';
     SubirPostComponent,
     PostsComponent,
     DashboardComponent,
+    ImagePipe
   ],
   imports: [
     FormsModule,
