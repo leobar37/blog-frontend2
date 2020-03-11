@@ -32,9 +32,6 @@
             ],
             "scripts": [
               "src/assets/plugins/jquery/jquery.min.js",
-              "src/assets/js/plugins.js",
-              "src/assets/js/pace.min.js",
-              "src/assets/js/modernizr.js",
               "src/assets/js/perfect-scrollbar.jquery.min.js",
               "src/assets/plugins/bootstrap/js/bootstrap.min.js",
               "src/assets/plugins/bootstrap/js/popper.min.js",
@@ -46,8 +43,9 @@
                "src/assets/js/custom.js",
                "./node_modules/froala-editor/js/froala_editor.pkgd.min.js",
                "src/assets/plugins/Magnific-Popup-master/dist/jquery.magnific-popup.min.js",
-               "src/assets/plugins/Magnific-Popup-master/dist/jquery.magnific-popup-init.js"
-               
+               "src/assets/plugins/Magnific-Popup-master/dist/jquery.magnific-popup-init.js",
+                "src/assets/js/jquery.stellar.min.js",
+              
             ]
             
           },

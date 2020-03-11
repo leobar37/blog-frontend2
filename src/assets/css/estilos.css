@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css?family=Bree+Serif&display=swap");
+* {
+  padding: 0;
+  margin: 0; }
+
+@font-face {
+  font-family: "Oswald";
+  src: url("https://fonts.googleapis.com/css?family=Oswald:400,500,600,700&display=swap"); }
+a {
+  cursor: pointer; }
+
+.titulo {
+  font-size: 35px;
+  padding: 10px 10px;
+  font-family: "Oswald", sans-serif; }
+
+.contS {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px; }
+  .contS a {
+    display: block;
+    padding: 10px 50px;
+    padding-left: 3rem; }
+    .contS a i {
+      font-size: 20px; }
+  .contS .bto {
+    padding: 10px 20px; }
+    .contS .bto i {
+      font-size: 20px;
+      padding-right: 10px; }
+
+.menu {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  text-align: center;
+  padding-left: 1.5rem;
+  text-align: left;
+  padding-bottom: 20px; }
+  .menu a {
+    font-size: 20px;
+    padding: 0  20px;
+    font-family: "Oswald", sans-serif; }
+    .menu a:hover {
+      color: blueviolet; }
+
+/*# sourceMappingURL=estilos.css.map */

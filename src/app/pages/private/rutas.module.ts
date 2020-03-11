@@ -16,7 +16,7 @@ const rutas:Routes = [
         {path :'editpost/:id' , component:EditPostComponent, data : { titulo : 'editar post'} }
       ]
     } ,
-    {path : ''  , pathMatch : 'full' , redirectTo : 'pr'}
+    // {path : ''  , pathMatch : 'full' , redirectTo : 'pr'}
 
 ]
 

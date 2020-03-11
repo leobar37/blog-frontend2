@@ -46,19 +46,7 @@ export class EditPostComponent implements OnInit ,  OnDestroy{
       }
     } ,
     imageResizeWithPercent : true,
-    events : {
-      'froalaEditor.focus' : function(e , editor) {
-        console.log(editor.selection.get());
-      },
-      events: {
-        "initialized": () => {
-          console.log('initialized');
-        },
-        "contentChanged": () => {
-          console.log("content changed");
-        }
-      }
-    },
+
   
   }
   public options2: Object = {
@@ -81,19 +69,7 @@ export class EditPostComponent implements OnInit ,  OnDestroy{
       }
     } ,
     imageResizeWithPercent : true,
-    events : {
-      'froalaEditor.focus' : function(e , editor) {
-        console.log(editor.selection.get());
-      },
-      events: {
-        "initialized": () => {
-          console.log('initialized');
-        },
-        "contentChanged": () => {
-          console.log("content changed");
-        }
-      }
-    },
+
   }
   
   public extracto : string  = "";
@@ -151,7 +127,7 @@ export class EditPostComponent implements OnInit ,  OnDestroy{
        this._blog.editarEntrada(  this.postBd._id , this.post).subscribe((resp:IrptaEntrada) =>{
          if(resp.ok){
           let post : IPost = resp.entrada;
-          console.log(resp);
+        
           observer.next('datos correctamente guardados texto');
           observer.next('guardando imagenes');
           //por corregir
@@ -260,7 +236,7 @@ export class EditPostComponent implements OnInit ,  OnDestroy{
     } 
     this.files =  files;
     console.log(this.files);
-    console.log(imgs);
+
     return imgs;
  
     

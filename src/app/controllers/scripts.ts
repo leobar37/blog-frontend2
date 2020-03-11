@@ -70,10 +70,7 @@ export const eliminarEstilos =  (atr: string)=> {
   //convertir una imagen en  base 64
 
 export function imgToBase64(url, callback) {
-    if (!window.FileReader) {
-      callback(null);
-      return;
-    }
+
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'blob';
     xhr.onload = function() {

@@ -178,6 +178,9 @@ body {
   padding-top: 1.5rem;
   
 }
+.tit{
+   color: black;
+}
 #titulo h1 {
    font-family: var(--lexen);
 }
