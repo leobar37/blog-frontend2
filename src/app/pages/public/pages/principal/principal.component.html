@@ -1,5 +1,5 @@
 	<!-- SECTION -->
-	<div class="section">
+	<div class="section" *ngIf="postsP.length > 0">
 		<!-- container -->
 		<div class="container">
 			<!-- row -->
@@ -7,15 +7,23 @@
 				<div class="col-md-8 hot-post-left">
 					<!-- post -->
 					<div class="post post-thumb">
-						<a class="post-img" href="blog-post.html"><img src="assets/images/hot-post-1.jpg" alt=""></a>
+						<a class="post-img">
+							<img [src]="postsP[0]?.images[0].imagenes[0] | image " alt="">
+						</a>
 						<div class="post-body">
-							<div class="post-category">
-								<a href="category.html">Lifestyle</a>
+							<div
+							 class="post-category">
+								<a class="badge badge-success text-white p-1 m-1" 
+								*ngFor="let key of this.postsP[0].keywords">
+									{{ key }}
+								</a>
 							</div>
-							<h3 class="post-title title-lg"><a href="blog-post.html">Postea senserit id eos, vivendo periculis ei qui</a></h3>
+							<h3 class="post-title title-lg">
+								<a >{{postsP[0].title}}</a>
+							</h3>
 							<ul class="post-meta">
-								<li><a href="author.html">John Doe</a></li>
-								<li>20 April 2018</li>
+								<li><a href="author.html">{{postsP[0].autor.nombre}}</a></li>
+								<li>{{this.postsP[0].fechaPublicacion}}</li>
 							</ul>
 						</div>
 					</div>
@@ -24,15 +32,23 @@
 				<div class="col-md-4 hot-post-right">
 					<!-- post -->
 					<div class="post post-thumb">
-						<a class="post-img" href="blog-post.html"><img src="assets/images/hot-post-2.jpg" alt=""></a>
+						<a class="post-img">
+							<img [src]="postsP[1]?.images[0].imagenes[3] | image " alt="">
+						</a>
 						<div class="post-body">
-							<div class="post-category">
-								<a href="category.html">Lifestyle</a>
+							<div
+							 class="post-category">
+								<a class="badge badge-success text-white p-1 m-1" 
+								*ngFor="let key of this.postsP[1].keywords">
+									{{ key }}
+								</a>
 							</div>
-							<h3 class="post-title"><a href="blog-post.html">Sed ut perspiciatis, unde omnis iste natus error sit</a></h3>
+							<h3 class="post-title title-lg">
+								<a >{{postsP[1].title}}</a>
+							</h3>
 							<ul class="post-meta">
-								<li><a href="author.html">John Doe</a></li>
-								<li>20 April 2018</li>
+								<li><a href="author.html">{{postsP[1].autor.nombre}}</a></li>
+								<li>{{this.postsP[1].fechaPublicacion}}</li>
 							</ul>
 						</div>
 					</div>
@@ -40,16 +56,23 @@
 
 					<!-- post -->
 					<div class="post post-thumb">
-						<a class="post-img" href="blog-post.html"><img src="assets/images/hot-post-3.jpg" alt=""></a>
+						<a class="post-img">
+							<img [src]="postsP[2]?.images[0].imagenes[2] | image " alt="">
+						</a>
 						<div class="post-body">
-							<div class="post-category">
-								<a href="category.html">Fashion</a>
-								<a href="category.html">Lifestyle</a>
+							<div
+							 class="post-category">
+								<a class="badge badge-success text-white p-1 m-1" 
+								*ngFor="let key of this.postsP[2].keywords">
+									{{ key }}
+								</a>
 							</div>
-							<h3 class="post-title"><a href="blog-post.html">Mel ut impetus suscipit tincidunt. Cum id ullum laboramus persequeris.</a></h3>
+							<h3 class="post-title title-lg">
+								<a >{{postsP[2].title}}</a>
+							</h3>
 							<ul class="post-meta">
-								<li><a href="author.html">John Doe</a></li>
-								<li>20 April 2018</li>
+								<li><a >{{postsP[2].autor.nombre}}</a></li>
+								<li>{{this.postsP[2].fechaPublicacion}}</li>
 							</ul>
 						</div>
 					</div>
@@ -154,92 +177,32 @@
 					</div>
 					<!-- /row -->
 						<!-- post -->
-                 	<div class="post post-row">
-		<a class="post-img" href="blog-post.html"><img src="assets/images/post-13.jpg" alt=""></a>
-		<div class="post-body">
-			<div class="post-category">
-				<a href="category.html">Travel</a>
-				<a href="category.html">Lifestyle</a>
-			</div>
-			<h3 class="post-title"><a href="blog-post.html">Mel ut impetus suscipit tincidunt. Cum id ullum laboramus persequeris.</a></h3>
-			<ul class="post-meta">
-				<li><a href="author.html">John Doe</a></li>
-				<li>20 April 2018</li>
-			</ul>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-		</div>
-                 	</div>
+					 <div class="post post-row postv"
+					 *ngFor="let post of postsP; let i = index"
+					 >
+	                	<a class="post-img" ><img [src]="post.images[0].imagenes[0] | image " alt=""></a>
+	                	<div class="post-body">
+	                		<div
+							 class="post-category">
+								<a class="badge badge-success text-white p-1 m-1" 
+								*ngFor="let key of this.post.keywords">
+									{{ key }}
+								</a>
+							</div>
+	                		<h3 class="post-title"><a href="blog-post.html">{{post.title}}</a></h3>
+	                		<ul class="post-meta">
+	                			<li><a href="author.html">John Doe</a></li>
+	                			<li>{{post.fechaPublicacion}}</li>
+							</ul>
+							 
+							<app-textohtml [text]="post.extracto" ></app-textohtml>
+						 
+
+						</div>
+                 </div>
                  	<!-- /post -->
                  
-                 	<!-- post -->
-                 	<div class="post post-row">
-		<a class="post-img" href="blog-post.html"><img src="assets/images/post-1.jpg" alt=""></a>
-		<div class="post-body">
-			<div class="post-category">
-				<a href="category.html">Travel</a>
-			</div>
-			<h3 class="post-title"><a href="blog-post.html">Sed ut perspiciatis, unde omnis iste natus error sit</a></h3>
-			<ul class="post-meta">
-				<li><a href="author.html">John Doe</a></li>
-				<li>20 April 2018</li>
-			</ul>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-		</div>
-                 	</div>
-                 	<!-- /post -->
-                 
-                 	<!-- post -->
-                 	<div class="post post-row">
-		<a class="post-img" href="blog-post.html"><img src="assets/images/post-5.jpg" alt=""></a>
-		<div class="post-body">
-			<div class="post-category">
-				<a href="category.html">Lifestyle</a>
-			</div>
-			<h3 class="post-title"><a href="blog-post.html">Postea senserit id eos, vivendo periculis ei qui</a></h3>
-			<ul class="post-meta">
-				<li><a href="author.html">John Doe</a></li>
-				<li>20 April 2018</li>
-			</ul>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-		</div>
-                 	</div>
-                 	<!-- /post -->
-                 
-                 	<!-- post -->
-                 	<div class="post post-row">
-		<a class="post-img" href="blog-post.html"><img src="assets/images/post-6.jpg" alt=""></a>
-		<div class="post-body">
-			<div class="post-category">
-				<a href="category.html">Fashion</a>
-				<a href="category.html">Lifestyle</a>
-			</div>
-			<h3 class="post-title"><a href="blog-post.html">Sed ut perspiciatis, unde omnis iste natus error sit</a></h3>
-			<ul class="post-meta">
-				<li><a href="author.html">John Doe</a></li>
-				<li>20 April 2018</li>
-			</ul>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-		</div>
-                 	</div>
-                 	<!-- /post -->
-                 
-                 	<!-- post -->
-                 	<div class="post post-row">
-		<a class="post-img" href="blog-post.html"><img src="assets/images/post-7.jpg" alt=""></a>
-		<div class="post-body">
-			<div class="post-category">
-				<a href="category.html">Health</a>
-				<a href="category.html">Lifestyle</a>
-			</div>
-			<h3 class="post-title"><a href="blog-post.html">Ne bonorum praesent cum, labitur persequeris definitionem quo cu?</a></h3>
-			<ul class="post-meta">
-				<li><a href="author.html">John Doe</a></li>
-				<li>20 April 2018</li>
-			</ul>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
-		</div>
-                 	</div>
-	            <!-- /post -->
+    
 
              	<div class="section-row loadmore text-center">
              		<a href="#" class="primary-button">Load More</a>

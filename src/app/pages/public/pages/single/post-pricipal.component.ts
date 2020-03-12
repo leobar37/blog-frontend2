@@ -4,7 +4,7 @@ import { BloApiService } from '../../../../services/posts.service';
 import { ActivatedRoute } from '@angular/router';
 import { IPost } from '../../../../models/blog.interfaces';
 import { URLBACKEND } from 'src/app/keywords/constants';
-import { cargarScript, elimarPertenencias } from '../../../../controllers/scripts';
+import { cargarScript, elimarPertenencias, transformarImagenes } from '../../../../controllers/scripts';
 
 
 declare var $:any;
@@ -44,37 +44,13 @@ export class PostPricipalComponent implements OnInit , OnDestroy{
            console.log(this.post);
               let elemento :  HTMLElement =  this.texto.nativeElement;
                elemento.innerHTML =  this.post.body;
-              this.imagenes =  this.transformarImagenes(this.post.images[0].imagenes);
+              this.imagenes =  transformarImagenes(this.post.images[0].imagenes);
               // let  $fotoramaDiv:  any =   $('#fotorama').fotorama();
               // $fotoramaDiv.fotorama();
               // console.log('la data');
               // console.log($fotoramaDiv);
          });
   }
-  transformarImagenes(imagenes :string[]):  string []{
-    // let html = '';
-    //      html  +='<div class="fotorama"';
-    //      html  +='data-width="100%"';
-    //      html  +='data-ratio="800/600"';
-    //      html  +='data-nav="thumbs"';
-    //      html  +='data-maxheight="70%"';
-    //      html  +='data-autoplay="true">';
-    let ruta;
-    let imgs: string[]   = [];
-    for (const image of imagenes) {
-       ruta =`${URLBACKEND}/uploads/posts/${image}`
-       imgs.push(ruta);
-    //  html+=' <img src="'+ruta+'">'
-     }
-    //  html+='</div>';
-    //  html+='</div>';
-     
-    // let  gal :any =  document.getElementById('gal');
-    //  gal.innerHTML = html;
-    return imgs;
-   
-
-  }
-
+ 
 }
 

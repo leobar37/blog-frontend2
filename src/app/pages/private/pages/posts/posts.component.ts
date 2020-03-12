@@ -18,9 +18,10 @@ export class PostsComponent implements OnInit {
   ngOnInit() {
   }
   llenarPosts(){
-    this._blog.getPosts(5).subscribe( data=>{
-      
-       this.posts =  data;
+    this._blog.getPosts('5e61d03af5454a398022e385').subscribe( data=>{
+        if(data)
+        this.posts = data;
+
     });
   }
   eliminarPost(id:string){

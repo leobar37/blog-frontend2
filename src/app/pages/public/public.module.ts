@@ -13,6 +13,8 @@ import { PrincipalComponent } from './pages/principal/principal.component';
 import { PostPricipalComponent } from './pages/single/post-pricipal.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { ServicesModule } from 'src/app/services/services.module';
+import { PipesModule } from 'src/app/pipes/pipes.module';
+import { TextohtmlComponent } from './shared/textohtml/textohtml.component';
 
 
 @NgModule({
@@ -22,9 +24,10 @@ import { ServicesModule } from 'src/app/services/services.module';
    PublicComponent,
   HeaderComponent,
   FooterComponent,
-   ImageTPipe,
+
     PrincipalComponent,
-    SidebarComponent
+    SidebarComponent,
+    TextohtmlComponent
  
   ],
   exports :[
@@ -37,7 +40,8 @@ import { ServicesModule } from 'src/app/services/services.module';
     CommonModule,
     HttpClientModule,
     ROUTESPUBLIC,
-    ServicesModule
+    ServicesModule,
+    PipesModule
   ],
   bootstrap :[ PublicComponent]
 })

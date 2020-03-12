@@ -8,17 +8,22 @@ import { PublicModule } from './pages/public/public.module';
 
 
 import { PrivateModule } from './pages/private/private.module';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/login/register.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     PublicModule,
-    PrivateModule
+    PrivateModule,
+ 
   ],
   providers: [
     

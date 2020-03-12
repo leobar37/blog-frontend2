@@ -45,21 +45,7 @@ export class SubirPostComponent implements OnInit  , OnDestroy {
         'buttonsVisible': 2
       }
     } ,
-    imageResizeWithPercent : true,
-    events : {
-      'froalaEditor.focus' : function(e , editor) {
-        console.log(editor.selection.get());
-      },
-      events: {
-        "initialized": () => {
-          console.log('initialized');
-        },
-        "contentChanged": () => {
-          console.log("content changed");
-        }
-      }
-    },
-  
+    imageResizeWithPercent : true,  
   }
   public options2: Object = {
     placeholderText: 'Edita tu extracto aqui',
@@ -90,6 +76,8 @@ export class SubirPostComponent implements OnInit  , OnDestroy {
      cargarEstilo('assets/css/pages/user-card.css', 'subpost');
      cargarEstilo('assets/css/pages/floating-label.css', 'subpost')
      cargarScripts(scriptsPost , 'subpost');
+    //  cargarScript('https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js' ,  'fotorama')
+
      let url = URLBACKEND +  '/uploads/tipo/nameImage';
      this.imagenes.push(url);
   }
@@ -100,6 +88,7 @@ export class SubirPostComponent implements OnInit  , OnDestroy {
   }
   ngOnDestroy(){
      elimarPertenencias('subpost');
+    //  elimarPertenencias('fotorama');
   }
   guardarContenido(){
    let observable = new Observable(observer=>{
@@ -111,7 +100,7 @@ export class SubirPostComponent implements OnInit  , OnDestroy {
           body : this.editorContent,
           extracto : this.extracto ,
           keywords : this.tags,
-          // fecha :  String(new Date().getTime()),
+          fecha :   new Date().getTime(),
           autor : '5e61d03af5454a398022e385'
        }  
        observer.next('guardando datos');

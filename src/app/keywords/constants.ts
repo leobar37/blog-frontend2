@@ -29,7 +29,6 @@ export const scriptsAdminPro: string[] =
         // "assets/js/jquery.min.js",
         // "assets/js/jquery.stellar.min.j",
         // "assets/js/main.js",
-        
     ]
 
     

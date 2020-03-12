@@ -3,11 +3,11 @@
         <div class="col-md-12">
             <h2 class="titulo">Galeria</h2>
         </div>
-       <div class="col-md-12" style="height: 50vh;">
-          <div  >
+       <div class="col-md-12" style="height: 35vh;">
+        
               <div class="card-body">
                   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                      <div class="carousel-inner" style="height: 50vh;" role="listbox">
+                      <div class="carousel-inner" style="height: 30vh;" role="listbox">
                           <div class="carousel-item text-center" style="overflow: hidden;" *ngFor="let image of imagenes" [ngClass]="{'active': image  == imagenes[0]}" > 
                               <img   class="img-responsive image" [src]="image" alt="First slide">
                            </div>
@@ -16,9 +16,10 @@
                       <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
                   </div>
              </div>
-          </div>
+           
+        
        </div>
-       <div class="col-md-12 mp-2 galery">
+       <div class="col-md-12 galery">
           <!-- ============================================================== -->
           <!-- ------------------------- galeria --------------- -->
           <!-- ============================================================== -->
@@ -45,9 +46,9 @@
                </div>    
        
              
-               <div class="col-md-12 text-center">
+               <div class="col-md-12 text-left">
                    <input (change)="manejarImagen($event)" type="file" name="file" id="file" class="inputfile" />
-                    <label for="file">upload</label>
+                    <label for="file">subir imagen</label>
                </div>
            </div>         
        </div>               
@@ -69,18 +70,15 @@
                <h2 class="titulo">Titulo</h2>
             </div>
               <div class="col-md-12">
-                   <form #f="ngForm"
-                    class="floating-labels">
-                       <div class="form-group m-b-40">
-                           <input type="text" 
-                           name="titulo"
-                            [(ngModel)]="titulo"
-                           class="form-control"
-                           placeholder="inspirate">
-                           <!-- <span class="bar"></span> -->
-                           <!-- <label for="input1">Inspirate</label> -->
-                       </div>
-                   </form>
+                <div class="form-group m-b-40">
+                    <input type="text" 
+                    name="titulo"
+                     [(ngModel)]="titulo"
+                    class="form-control"
+                    placeholder="inspirate">
+                    <!-- <span class="bar"></span> -->
+                    <!-- <label for="input1">Inspirate</label> -->
+                </div>
               </div>
               <!-- titulo del post -->
               <!-- categoria del post -->
@@ -88,18 +86,15 @@
                <h2 class="titulo">Categoria</h2>
             </div>
               <div class="col-md-12">
-                   <form #f="ngForm"
-                    class="floating-labels">
-                       <div class="form-group m-b-40">
-                           <input type="text" 
-                           name="titulo"
-                            [(ngModel)]="categoria"
-                           class="form-control"
-                            placeholder="categoria">
-                           <!-- <span class="bar"></span> -->
-                           <!-- <label for="input1">Categoria</label> -->
-                       </div>
-                   </form>   
+                <div class="form-group m-b-40">
+                    <input type="text" 
+                    name="titulo"
+                     [(ngModel)]="categoria"
+                    class="form-control"
+                     placeholder="categoria">
+                    <!-- <span class="bar"></span> -->
+                    <!-- <label for="input1">Categoria</label> -->
+                </div> 
               </div>
               <!-- categoria del post -->
        
@@ -181,7 +176,7 @@
        
    
        </div>
-      <div class="col-md-3 col-sm-12">
+      <!-- <div class="col-md-3 col-sm-12">
          <a 
          
          class="btn btn-primary btn-block">
@@ -189,7 +184,7 @@
             ver post
          </a>  
 
-      </div>
+      </div> -->
     
    </div>
    

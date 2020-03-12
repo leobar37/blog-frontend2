@@ -13,27 +13,23 @@ export class BloApiService {
    
   constructor(private http : HttpClient) { }
 
-  getPosts(tipo: number){
-    //tipos
-    //1 =  populares
-    //2= standares
-     return this.http.get(`${URLBACKEND}/entrada/listar`).pipe( map ( (data:IData) =>{
-       let postsPo : IPost[] = data.docs;
-      //  for (const post of data.docs ) {
-      //    //  console.log('este es un post');
-      //      if(post.tipoblog == tipo){
-      //        //condicion momentanea 
-      //        if(tipo == 2){
-      //          if(post.images.length  > 0 )  postsPo.push(post);
-      //         }
-      //         postsPo.push(post)
-      //      }
-      //  }        
-       
-       return postsPo;
-
+  getPosts(idAutor:string){
+     return this.http.get(`${URLBACKEND}/porautor/${idAutor}`).pipe( map ( (data:any) =>{
+      let postsPo : IPost[] ; 
+      if(data.ok){
+          postsPo= data.usuario.blogs;
+       }
+      return postsPo;
      }));
-  }
+    } 
+   getPostPrincipal(){
+    return this.http.get(`${URLBACKEND}/entrada/listar`).pipe( map ( (data:any) =>{
+       if(data.ok)
+        return data.docs
+      else
+        return undefined;
+     }));
+   }
   getPost(id :string){
      return this.http.get(`${URLBACKEND}/entrada/${id}`)
      .pipe(map( (data) =>{

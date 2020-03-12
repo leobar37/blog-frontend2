@@ -10,7 +10,7 @@ export interface IPost {
     title :string,
     body ? :string,
     extracto?:string,
-    autor :string,
+    autor? : Iusuario,
     fechaPublicacion : string,
     keywords? : string[]
     tipoblog ? : number
@@ -23,7 +23,7 @@ export interface IEntrada {
     body ? :string,
     extracto?:string,
     autor :string,
-    fecha?: string,
+    fecha?: number,
     keywords? : string[]
     tipo ? : number,
     categoria ?: string
@@ -37,4 +37,13 @@ export interface IData{
 export interface IrptaEntrada{
      ok : boolean,
      entrada ?:IPost,
+}
+export interface  Iusuario{
+  nombre?:string,
+  email  ?: string,
+  password?:string,
+  redes:string,
+  img?: string,
+  role ?:string,
+
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BloApiService } from './posts.service';
 import { SidebarService } from './sidebar.service';
+import { ScriptLoaderService } from './extras/script.service';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { SidebarService } from './sidebar.service';
   ],
   providers : [
      BloApiService,
-     SidebarService
+     SidebarService,
+     ScriptLoaderService
   ]
 })
 export class ServicesModule { }

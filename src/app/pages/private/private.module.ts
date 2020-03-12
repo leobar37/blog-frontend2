@@ -8,7 +8,6 @@ import { SubirPostComponent } from './pages/subir-post/subir-post.component';
 import { PostsComponent } from './pages/posts/posts.component';
 import { RUTASPRIVATE } from './rutas.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-
 //editor
 // Import all Froala Editor plugins.
 import 'froala-editor/js/plugins.pkgd.min.js';
@@ -28,9 +27,9 @@ import 'froala-editor/js/third_party/embedly.min';
 // Import Angular plugin.
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { FormsModule } from '@angular/forms';
-import { ImagePipe } from '../../pipes/image.pipe';
 import { RouterModule } from '@angular/router';
 import { EditPostComponent } from './pages/edit-post/edit-post.component';
+import { PipesModule } from '../../pipes/pipes.module';
 
 
 @NgModule({
@@ -42,15 +41,18 @@ import { EditPostComponent } from './pages/edit-post/edit-post.component';
     SubirPostComponent,
     PostsComponent,
     DashboardComponent,
-    ImagePipe,
-    EditPostComponent
+
+    EditPostComponent,
+  
+
   ],
   imports: [
     FormsModule,
     CommonModule,
     FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),
     RUTASPRIVATE,
-    RouterModule
+    RouterModule,
+    PipesModule
   ]
 })
 export class PrivateModule { }

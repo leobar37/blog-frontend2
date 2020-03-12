@@ -1,4 +1,5 @@
 import { async } from '@angular/core/testing';
+import { URLBACKEND } from '../keywords/constants';
 
 
  export const cargarEstilo = (styleUrl : string ,atr :string)=>{
@@ -12,12 +13,18 @@ import { async } from '@angular/core/testing';
       });   
  }
  
+export interface ScriptModel {
+  name: string,
+  src: string,
+  loaded: boolean
+}
+ 
 export let cargarScript = (scriptUrl : string , atr :string)=>{
     return  new Promise( (resolve , reject)=>{
       const scriptElment = document.createElement('script');
       scriptElment.setAttribute(atr , 'generado');
       scriptElment.src = scriptUrl;       
- 
+      // scriptElment.onload( )
      document.body.appendChild(scriptElment);
       resolve();
     }); 
@@ -59,7 +66,7 @@ export const eliminarEstilos =  (atr: string)=> {
               let li : HTMLElement =  link;
              if(li.hasAttribute(atr) ) {
                header.removeChild(li);
-               
+
              }
            }
            resolve;
@@ -100,3 +107,15 @@ export function  getArchivo(base64 : any , name :string) : File{
   var imagen_firma: File = new File([the_file],  name+'.png', { type: 'image/png' });
   return imagen_firma;
 }
+
+//transforma imagenes
+export  function  transformarImagenes(imagenes :string[]):  string []{
+  let ruta;
+  let imgs: string[]   = [];
+  for (const image of imagenes) {
+     ruta =`${URLBACKEND}/uploads/posts/${image}`
+     imgs.push(ruta);
+   }
+  return imgs;
+}
+
