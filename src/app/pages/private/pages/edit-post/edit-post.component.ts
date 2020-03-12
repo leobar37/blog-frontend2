@@ -238,8 +238,5 @@ export class EditPostComponent implements OnInit ,  OnDestroy{
     console.log(this.files);
 
     return imgs;
- 
-    
-    
   }
 }

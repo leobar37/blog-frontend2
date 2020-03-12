@@ -23,6 +23,22 @@
 
 
 <div class="container">
+    <div class="row">
+        <div class="col-md-8 p-3">
+            <div id="fotorama" 
+            class="fotorama"
+            data-width="100%"
+            data-ratio="800/600"
+            data-nav="thumbs"
+            data-maxheight="70%"
+            data-autoplay="true">
+              <img *ngFor="let imagen of imagenes"
+             [src]="imagen">
+          <!-- <img src="assets/images/post-2.jpg">
+          <img src="assets/images/post-3.jpg"> -->
+          
+       </div>
+        </div>
     <div class="section">
         <!-- container -->
         <div class="container">
@@ -42,7 +58,7 @@
     
                     <!-- post content -->
                     <div class="section-row" >
-                        <h3 class="tit">{{post.title}}</h3>
+                        <h3 *ngIf="title" class="tit">{{post.title}}</h3>
                          <div  #texto ></div>
                     </div>
                     <!-- /post content -->
@@ -260,7 +276,9 @@
                     </div>
                     <!-- /post reply -->
                 </div>
-             
+            <div class="col-md-4">
+                <app-sidebar></app-sidebar>
+            </div>
             </div>
             <!-- /row -->
         </div>

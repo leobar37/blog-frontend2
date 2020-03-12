@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { PublicModule } from './pages/public/public.module';
-import { BloApiService } from './services/posts.service';
 
 
 import { PrivateModule } from './pages/private/private.module';
@@ -14,9 +13,6 @@ import { PrivateModule } from './pages/private/private.module';
 @NgModule({
   declarations: [
     AppComponent,
-
-
-
   ],
   imports: [
     BrowserModule,
