@@ -1,14 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { cargarEstilo, cargarScripts, cargarScript } from '../../../../controllers/scripts';
-import { scriptsPost } from 'src/app/keywords/constants';
 import { BloApiService } from 'src/app/services/posts.service';
 import {  IEntrada, IrptaEntrada } from 'src/app/models/blog.interfaces';
 import   Swal from 'sweetalert2';
 import { Observable } from 'rxjs';
 import { IPost } from '../../../../models/blog.interfaces';
 import { URLBACKEND } from '../../../../keywords/constants';
-import { elimarPertenencias } from 'src/app/controllers/scripts';
 declare var $:any;
 interface HtmlElement extends Event{
   target : HTMLInputElement & EventTarget;
@@ -72,10 +70,10 @@ export class SubirPostComponent implements OnInit  , OnDestroy {
   public extracto : string  = "";
   public editorContent: string = "";
   constructor(private _blog:BloApiService) {
-     cargarEstilo('assets/plugins/Magnific-Popup-master/dist/magnific-popup.css', 'subpost');
+    //  cargarEstilo('assets/plugins/Magnific-Popup-master/dist/magnific-popup.css', 'subpost');
      cargarEstilo('assets/css/pages/user-card.css', 'subpost');
-     cargarEstilo('assets/css/pages/floating-label.css', 'subpost')
-     cargarScripts(scriptsPost , 'subpost');
+    //  cargarEstilo('assets/css/pages/floating-label.css', 'subpost')
+    //  cargarScripts(scriptsPost , 'subpost');
     //  cargarScript('https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js' ,  'fotorama')
 
      let url = URLBACKEND +  '/uploads/tipo/nameImage';
@@ -87,7 +85,7 @@ export class SubirPostComponent implements OnInit  , OnDestroy {
     $('#carousel').carousel()
   }
   ngOnDestroy(){
-     elimarPertenencias('subpost');
+ 
     //  elimarPertenencias('fotorama');
   }
   guardarContenido(){

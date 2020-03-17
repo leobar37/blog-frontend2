@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { cargarScripts, cargarEstilo, elimarPertenencias } from '../../controllers/scripts';
-import { scriptsPublic } from 'src/app/keywords/constants';
+import { cargarScripts, cargarEstilo } from '../../controllers/scripts';
 declare var $: any;
  declare function   publicComponent();
 
@@ -10,24 +9,28 @@ declare var $: any;
   templateUrl: './public.component.html',
 })
 export class PublicComponent implements OnInit ,OnDestroy {
-
-  constructor() {
+  public load : boolean = false;
+ constructor() {
       //  $(".body").removeClass('cl-preload');
       // cargarEstilo("" , 'private');
-      cargarEstilo("assets/css/estilos.css" , 'private');
-      cargarEstilo("assets/css/stylePublic.css" , 'private');
-      
+
     }
     
     ngOnInit() {
       //  iniciarPlugin();
-      cargarScripts(scriptsPublic, 'private').then( ()=>{
-        publicComponent();
-
-      });
+      // cargarScripts(scriptsPublic, 'private').then( ()=>{
+      //   publicComponent();
+      let depene = async ()=>{
+        await cargarEstilo('assets/plugins/bootstrap/css/bootstrap.min.css' , 'public')
+        await cargarEstilo("assets/css/estilos.css" , 'private');
+        await cargarEstilo("assets/css/stylePublic.css" , 'private');
+        this.load = true;
+      }
+          depene(); 
+      // });
   }
   ngOnDestroy(){
-    elimarPertenencias('private');
+    // elimarPertenencias('private');
   }
 
 }

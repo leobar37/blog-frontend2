@@ -1,7 +1,7 @@
 import { Component, OnInit , OnDestroy } from '@angular/core';
 import { BloApiService } from '../../../../services/posts.service';
-import { cargarEstilo, cargarScripts, elimarPertenencias, imgToBase64 ,  getArchivo } from 'src/app/controllers/scripts';
-import { scriptsPost, URLBACKEND } from '../../../../keywords/constants';
+import { cargarEstilo, cargarScripts, imgToBase64 ,  getArchivo } from 'src/app/controllers/scripts';
+import { URLBACKEND } from '../../../../keywords/constants';
 import { IEntrada, IPost, IrptaEntrada } from '../../../../models/blog.interfaces';
 
 import Swal from 'sweetalert2';
@@ -77,10 +77,10 @@ export class EditPostComponent implements OnInit ,  OnDestroy{
   constructor(private _blog:BloApiService, 
      private router : Router,
       private activ:ActivatedRoute) {
-     cargarEstilo('assets/plugins/Magnific-Popup-master/dist/magnific-popup.css' , 'epost');
-     cargarEstilo('assets/css/pages/user-card.css' , 'epost');
-     cargarEstilo('assets/css/pages/floating-label.css' , 'epost')
-     cargarScripts(scriptsPost , 'epost');
+    //  cargarEstilo('assets/plugins/Magnific-Popup-master/dist/magnific-popup.css' , 'epost');
+    //  cargarEstilo('assets/css/pages/user-card.css' , 'epost');
+    //  cargarEstilo('assets/css/pages/floating-label.css' , 'epost')
+    //  cargarScripts(scriptsPost , 'epost');
      let url = URLBACKEND +  '/uploads/tipo/nameImage';
       activ.params.subscribe( params=>{
           const  {  id }  = params;
@@ -107,7 +107,7 @@ export class EditPostComponent implements OnInit ,  OnDestroy{
     $('#carousel').carousel()
   }
  ngOnDestroy(){
-     elimarPertenencias('epost'); 
+    
  }
   guardarContenido(){
 

@@ -1,0 +1,7 @@
+<div *ngIf="data?.errors">
+    <span *ngIf="data.errors.required && data.touched ">El {{nombre}} es requerido</span>
+    <span *ngIf="data.errors.email && data.touched ">{{nombre}} invalido</span>
+    <span *ngIf="data.errors.minlength && data.touched ">Se requires al menos {{data.errors.minlength.requiredLength}} caracteres</span>
+    <span *ngIf="data.errors.existe && data.touched ">{{data.value}} ya existe</span>
+    <span *ngIf="data.errors.iguales && data.touched ">Las contraseñas no coinciden</span>
+</div>

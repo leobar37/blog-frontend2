@@ -3,7 +3,7 @@
 		<!-- container -->
 		<div class="container">
 			<!-- row -->
-			<div id="hot-post" class="row hot-post">
+			<div id="hot-post" class="row hot-post" *ngIf="postsP">
 				<div class="col-md-8 hot-post-left">
 					<!-- post -->
 					<div class="post post-thumb">
@@ -19,7 +19,7 @@
 								</a>
 							</div>
 							<h3 class="post-title title-lg">
-								<a >{{postsP[0].title}}</a>
+								<a [routerLink]="['/single' , postsP[0]._id]" >{{postsP[0].title}}</a>
 							</h3>
 							<ul class="post-meta">
 								<li><a href="author.html">{{postsP[0].autor.nombre}}</a></li>
@@ -44,10 +44,10 @@
 								</a>
 							</div>
 							<h3 class="post-title title-lg">
-								<a >{{postsP[1].title}}</a>
+								<a [routerLink]="['/single' , postsP[1]._id]" routerLinkActive="active" >{{postsP[1].title}}</a>
 							</h3>
 							<ul class="post-meta">
-								<li><a href="author.html">{{postsP[1].autor.nombre}}</a></li>
+								<li><a>{{postsP[1].autor.nombre}}</a></li>
 								<li>{{this.postsP[1].fechaPublicacion}}</li>
 							</ul>
 						</div>
@@ -68,7 +68,7 @@
 								</a>
 							</div>
 							<h3 class="post-title title-lg">
-								<a >{{postsP[2].title}}</a>
+								<a [routerLink]="['/single' , postsP[2]._id]" >{{postsP[2].title}}</a>
 							</h3>
 							<ul class="post-meta">
 								<li><a >{{postsP[2].autor.nombre}}</a></li>
@@ -100,87 +100,33 @@
 							</div>
 						</div>
 						<!-- post -->
-						<div class="col-md-6">
+						<div class="col-md-6" *ngFor="let post of postRecientes">
 							<div class="post">
-								<a class="post-img" href="blog-post.html"><img src="assets/images/post-1.jpg" alt=""></a>
+								<a class="post-img" [routerLink]="['/single' , post._id]"><img [src]="post.images[0].imagenes[0] | image "alt=""></a>
 								<div class="post-body">
-									<div class="post-category">
-										<a href="category.html">Travel</a>
-									</div>
-									<h3 class="post-title"><a href="blog-post.html">Sed ut perspiciatis, unde omnis iste natus error sit</a></h3>
+									<div class="post-category" style="background: transparent;">
+									<a class="badge badge-success text-white p-1 m-1" 
+									*ngFor="let key of this.post.keywords">
+										{{ key }}
+									</a>
+								</div>
+									<h3 class="post-title"><a [routerLink]="['/single' , post._id]" >{{post.title}}</a></h3>
 									<ul class="post-meta">
-										<li><a href="author.html">John Doe</a></li>
-										<li>20 April 2018</li>
+										<li><a href="author.html"> {{ post.autor.nombre}} </a></li>
+										<li>{{post.fechaPublicacion}}</li>
 									</ul>
 								</div>
 							</div>
 						</div>
 						<!-- /post -->
 
-						<!-- post -->
-						<div class="col-md-6">
-							<div class="post">
-								<a class="post-img" href="blog-post.html"><img src="assets/images/post-2.jpg" alt=""></a>
-								<div class="post-body">
-									<div class="post-category">
-										<a href="category.html">Technology</a>
-										<a href="category.html">Lifestyle</a>
-									</div>
-									<h3 class="post-title"><a href="blog-post.html">Ne bonorum praesent cum, labitur persequeris definitionem quo cu?</a></h3>
-									<ul class="post-meta">
-										<li><a href="author.html">John Doe</a></li>
-										<li>20 April 2018</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<!-- /post -->
-
-						<div class="clearfix visible-md visible-lg"></div>
-
-						<!-- post -->
-						<div class="col-md-6">
-							<div class="post">
-								<a class="post-img" href="blog-post.html"><img src="assets/images/post-4.jpg" alt=""></a>
-								<div class="post-body">
-									<div class="post-category">
-										<a href="category.html">Health</a>
-									</div>
-									<h3 class="post-title"><a href="blog-post.html">Postea senserit id eos, vivendo periculis ei qui</a></h3>
-									<ul class="post-meta">
-										<li><a href="author.html">John Doe</a></li>
-										<li>20 April 2018</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<!-- /post -->
-
-						<!-- post -->
-						<div class="col-md-6">
-							<div class="post">
-								<a class="post-img" href="blog-post.html"><img src="assets/images/post-7.jpg" alt=""></a>
-								<div class="post-body">
-									<div class="post-category">
-										<a href="category.html">Health</a>
-										<a href="category.html">Lifestyle</a>
-									</div>
-									<h3 class="post-title"><a href="blog-post.html">Sed ut perspiciatis, unde omnis iste natus error sit</a></h3>
-									<ul class="post-meta">
-										<li><a href="author.html">John Doe</a></li>
-										<li>20 April 2018</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<!-- /post -->
 					</div>
 					<!-- /row -->
 						<!-- post -->
 					 <div class="post post-row postv"
 					 *ngFor="let post of postsP; let i = index"
 					 >
-	                	<a class="post-img" ><img [src]="post.images[0].imagenes[0] | image " alt=""></a>
+	                	<a [routerLink]="['/single' , post._id]" class="post-img" ><img [src]="post.images[0].imagenes[0] | image " alt=""></a>
 	                	<div class="post-body">
 	                		<div
 							 class="post-category">
@@ -189,9 +135,9 @@
 									{{ key }}
 								</a>
 							</div>
-	                		<h3 class="post-title"><a href="blog-post.html">{{post.title}}</a></h3>
+	                		<h3 class="post-title"><a [routerLink]="['/single' , post._id]" >{{post.title}}</a></h3>
 	                		<ul class="post-meta">
-	                			<li><a href="author.html">John Doe</a></li>
+	                			<li><a >John Doe</a></li>
 	                			<li>{{post.fechaPublicacion}}</li>
 							</ul>
 							 

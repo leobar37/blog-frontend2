@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject,  OnDestroy } from '@angular/core';
-import { cargarScripts, cargarEstilo, elimarPertenencias } from '../../controllers/scripts';
-import { scriptsAdminPro } from '../../keywords/constants';
+// import { cargarScripts, cargarEstilo, dependencias, eliminarEstilo } from '../../controllers/scripts';
+import { scriptsAdminPro, estilosAdminPro } from '../../keywords/constants';
 import { DOCUMENT } from '@angular/common';
+import { dependencias  , eliminarEstilo ,eliminarScript } from 'src/app/controllers/scripts';
 
 declare function adminPro() ;
 @Component({
@@ -9,20 +10,33 @@ declare function adminPro() ;
   templateUrl: './private.component.html', 
 })
 export class PrivateComponent implements OnInit , OnDestroy {
-
+  load :boolean  = false;
   constructor( @Inject(DOCUMENT) private  doc : Document) {
-  cargarEstilo('assets/css/style.css' , 'blank');
-  cargarEstilo('assets/css/colors/default-dark.css' , 'blank');
- 
-  }
-  ngOnInit() {
-    // cargarEstilo('assets/css/style.css')
-    cargarScripts(scriptsAdminPro, 'blank').then(data =>{ 
-      adminPro();
-    });
+    const depende = async ()=>{
+    //  await  cargarEstilo('assets/css/colors/default-dark.css' , 'blank');
+    //  await cargarEstilo('assets/css/style.css' , 'blank');
+    await  dependencias('all' , estilosAdminPro , scriptsAdminPro);
+    this.load = true;
+    adminPro();
+  } 
+  depende();
+  
+  
+}
+ngOnInit() {
+  // cargarEstilo('assets/css/style.css')
+    // cargarScripts(scriptsAdminPro, 'blank').then(data =>{ 
+    //   adminPro();
+    //    this.load = true;
+    // });
   }
   ngOnDestroy(){
-    elimarPertenencias('blank');
+    let eliminarDependecias = async ()=>{
+      await   eliminarEstilo( 'assets/css/style.css');
+     await eliminarEstilo( 'assets/css/colors/default-dark.css');
+        await  eliminarEstilo('assets/css/pages/login-register-lock.css');
+      }
+      eliminarDependecias(); 
   }
 }
 

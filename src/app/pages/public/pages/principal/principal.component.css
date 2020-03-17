@@ -6,6 +6,8 @@
     background: red;
 }
 .postv{
-   height: 28vh;
+   height: 40vh;
    overflow: hidden; 
 }
+
+/* estilos para el scrollbar */

@@ -22,10 +22,15 @@ export class BloApiService {
       return postsPo;
      }));
     } 
-   getPostPrincipal(){
-    return this.http.get(`${URLBACKEND}/entrada/listar`).pipe( map ( (data:any) =>{
-       if(data.ok)
-        return data.docs
+   getPostPrincipal(tipo:string = 'ordenado'){
+     
+    return this.http.get(`${URLBACKEND}/principal/${tipo}`).pipe( map ( (data:any) =>{
+       console.log(data);
+       
+      if(data.ok){
+         console.log(data.docs);
+         
+        return data.docs}
       else
         return undefined;
      }));
@@ -43,14 +48,12 @@ export class BloApiService {
   subirImagenesPost(idPost : string , imagenes:File[] , tamaño ?: string , importancia?:string){
     let url =  URLBACKEND + '/upload/post/'+idPost;
     let formData = new FormData();
-    
     for (const imagen of imagenes) {
       formData.append('imagenes', imagen);
     }
     formData.append('tamaño' , '300*300');
     formData.append('importancia', 'prueba')
     return  this.http.post(url, formData);    
-
   }
 
     eliminarPost(id:string){

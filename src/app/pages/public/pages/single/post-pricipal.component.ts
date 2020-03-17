@@ -4,7 +4,8 @@ import { BloApiService } from '../../../../services/posts.service';
 import { ActivatedRoute } from '@angular/router';
 import { IPost } from '../../../../models/blog.interfaces';
 import { URLBACKEND } from 'src/app/keywords/constants';
-import { cargarScript, elimarPertenencias, transformarImagenes } from '../../../../controllers/scripts';
+import { cargarScript, transformarImagenes } from '../../../../controllers/scripts';
+import { eliminarScript } from 'src/app/controllers/scripts';
 
 
 declare var $:any;
@@ -17,21 +18,36 @@ declare var $:any;
 export class PostPricipalComponent implements OnInit , OnDestroy{
   public post:IPost;
  public imagenes:string[] = [];
+
   @ViewChild('texto',  null) texto :ElementRef; 
   constructor(private _nav:MenuService ,
      private _post:BloApiService ,
       private activRoute :ActivatedRoute) {
-        cargarScript('https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js' ,  'fotorama')
-       }
+        
+      
+        
+      }
 
   ngOnInit() {
+      let andarDependencias = async ()=>{
+          await cargarScript('assets/plugins/jquery/jquery.min.js' ,'fotorama');     
+          await  cargarScript('https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js' ,  'fotorama')
+                 
+        }
+        andarDependencias();
     this.activRoute.params.subscribe( data =>{
       const { id  }  = data;  
          this.traerPost(id);           
     }); 
   }
   ngOnDestroy(){
-     elimarPertenencias('fotorama');
+   //eliminar dependencias
+   let eliminarDependencias = async ()=>{
+    await eliminarScript('assets/plugins/jquery/jquery.min.js' );     
+    await  eliminarScript('https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js');
+           
+  }
+   eliminarDependencias();
   }
   traerPost(id:string){
          this._post.getPost(id).subscribe( ( data : any) =>{

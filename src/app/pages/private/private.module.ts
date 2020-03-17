@@ -30,6 +30,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { EditPostComponent } from './pages/edit-post/edit-post.component';
 import { PipesModule } from '../../pipes/pipes.module';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { GuardsModule } from 'src/app/guards/guards.module';
 
 
 @NgModule({
@@ -41,12 +43,12 @@ import { PipesModule } from '../../pipes/pipes.module';
     SubirPostComponent,
     PostsComponent,
     DashboardComponent,
-
+    ProfileComponent,
     EditPostComponent,
-  
-
+    
   ],
   imports: [
+    GuardsModule,
     FormsModule,
     CommonModule,
     FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),

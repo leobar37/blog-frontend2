@@ -7,9 +7,9 @@ import { URLBACKEND } from '../keywords/constants';
 export class ImagePipe implements PipeTransform {
 
   transform(image:string, tipo:string =  'posts' ): any {
-    
+    console.log('ruata de imageb');    
     let ruta =  URLBACKEND ;    
-    if(image.length == 0){
+    if(image.length == 0 || !image){
       ruta = `${ruta}/uploads/${tipo}/rdsasa`;
       return ruta;;
     }
@@ -24,6 +24,8 @@ export class ImagePipe implements PipeTransform {
             ruta =  `${ruta}+/uploads/${tipo}/rdsasa` 
            break;
     }
+    console.log(ruta);
+    
     return ruta;
   }
 

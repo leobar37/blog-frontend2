@@ -6,15 +6,15 @@
             <ul id="sidebarnav">
                 <li class="user-profile">
                     <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
-                        <img src="assets/images/users/profile.png" alt="user" />
-                        <span class="hide-menu">Steave Jobs </span>
+                        <img [src]="_us.usuario.img | image:'usuarios'" alt="user" />
+                        <span class="hide-menu">{{ _us.usuario.nombre}}</span>
                     </a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a >My Profile </a></li>
                         <li><a >My Balance</a></li>
                         <li><a >Inbox</a></li>
                         <li><a >Account Setting</a></li>
-                        <li><a >Logout</a></li>
+                        <li><a (click)="logout()" >Logout</a></li>
                     </ul>
                 </li>
                 <li class="nav-devider"></li>

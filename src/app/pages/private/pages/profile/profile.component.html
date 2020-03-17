@@ -1,0 +1,156 @@
+<div class="row" *ngIf="load && usuario">
+
+    <!-- Column -->
+   
+    <div class="col-lg-4 col-xlg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div   class="m-t-30 text-center"> <img 
+                    style="padding-bottom: 20px;" 
+                    [src]="usuario.img | image:'usuarios' " class="" width="250" />
+                    <h4 class="card-title m-t-10">{{usuario.nombre}}</h4>
+                    <h6 class="card-subtitle">{{usuario.role}}</h6>
+                    <!-- <div class="row text-center justify-content-md-center">
+                        <div class="col-4"><a  class="link"><i class="icon-people"></i> <div class="font-medium">254</div></a></div>
+                        <div class="col-4"><a  class="link"><i class="icon-picture"></i> <div class="font-medium">54</div></a></div>
+                    </div> -->
+                </div>
+            </div>
+            <div>
+                <hr> </div>
+            <div class="card-body"> <small class="text-muted">correo electronico</small>
+                <h6>{{usuario.email}}</h6>
+                 <!-- <small class="text-muted p-t-30 db">Phone</small>
+                <h6>+91 654 784 547</h6> -->
+                <!-- <small class="text-muted p-t-30 db">Address</small>
+                <h6>71 Pilgrim Avenue Chevy Chase, MD 20815</h6> -->
+                 <small class="text-muted p-t-30 db">redes sociales</small>
+                <br/>
+                <button class="btn btn-circle btn-secondary"><i class="fab fa-facebook"></i></button>
+                <button class="btn btn-circle btn-secondary"><i class="fab fa-twitter"></i></button>
+                <button class="btn btn-circle btn-secondary"><i class="fab fa-youtube"></i></button>
+           
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+    <!-- Column -->
+    <div class="col-lg-8 col-xlg-9 col-md-6">
+        <div class="card pl-md-5">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs profile-tab" role="tablist">
+                <!-- <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab">Timeline</a> </li> -->
+                <!-- <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Per</a></li> -->
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab">configuraciones</a> </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+           
+                <!--second tab-->
+                <!-- <div class="tab-pane active" id="profile" role="tabpanel">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 col-xs-6 b-r"> <strong>Full Name</strong>
+                                <br>
+                                <p class="text-muted">Johnathan Deo</p>
+                            </div>
+                            <div class="col-md-3 col-xs-6 b-r"> <strong>Mobile</strong>
+                                <br>
+                                <p class="text-muted">(123) 456 7890</p>
+                            </div>
+                            <div class="col-md-3 col-xs-6 b-r"> <strong>Email</strong>
+                                <br>
+                                <p class="text-muted">johnathan@admin.com</p>
+                            </div>
+                            <div class="col-md-3 col-xs-6"> <strong>Location</strong>
+                                <br>
+                                <p class="text-muted">London</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <p class="m-t-30">Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries </p>
+                        <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                        <h4 class="font-medium m-t-30">Skill Set</h4>
+                        <hr>
+                        <h5 class="m-t-30">Wordpress <span class="pull-right">80%</span></h5>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:80%; height:6px;"> <span class="sr-only">50% Complete</span> </div>
+                        </div>
+                        <h5 class="m-t-30">HTML 5 <span class="pull-right">90%</span></h5>
+                        <div class="progress">
+                            <div class="progress-bar bg-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width:90%; height:6px;"> <span class="sr-only">50% Complete</span> </div>
+                        </div>
+                        <h5 class="m-t-30">jQuery <span class="pull-right">50%</span></h5>
+                        <div class="progress">
+                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%; height:6px;"> <span class="sr-only">50% Complete</span> </div>
+                        </div>
+                        <h5 class="m-t-30">Photoshop <span class="pull-right">70%</span></h5>
+                        <div class="progress">
+                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%; height:6px;"> <span class="sr-only">50% Complete</span> </div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="tab-pane active" id="settings" role="tabpanel">
+                
+                    <div class="card-body">
+                        <!-- upload image -->
+                        <div  style="width: 50%; padding-bottom: 15px;" >
+                            <h4 class="card-title">Perfil de usuario</h4>
+                            <!-- <label for="input-file-now">Your so fresh input file — Default version</label> -->
+                                <input (change)="actualizarFoto($event)" type="file" class="dropify"/>
+                        <!-- fin upload image -->
+                        <form class="form-horizontal form-material pt-2">
+                            <div class="form-group">
+                                <label class="col-md-12">Nombre</label>
+                                <div class="col-md-12">
+                                    <input
+                                     [(ngModel)]="usuario.nombre"
+                                     name="nombre"
+                                    type="text" placeholder="{{usuario.nombre}}" class="form-control form-control-line">
+                                </div>
+                            </div>
+                            <!-- <div class="form-group">
+                                <label for="example-email" class="col-md-12">Email</label>
+                                <div class="col-md-12">
+                                    <input type="email" placeholder="" class="form-control form-control-line" name="example-email" id="example-email">
+                                </div>
+                            </div> -->
+                            <!-- <div class="form-group">
+                                <label class="col-md-12">Password</label>
+                                <div class="col-md-12">
+                                    <input type="password" value="password" class="form-control form-control-line">
+                                </div>
+                            </div>-->
+                            <div class="form-group">
+                                <label class="col-md-12" style="padding-bottom: 10px;">Redes sociales:</label>
+                                <div class="col-md-12">
+                                    <button (click)="redSocial('facebook')"  class="btn btn-circle btn-secondary m-1"><i class="fab fa-facebook"></i></button>
+                                    <button (click)="redSocial('twitter')"  class="btn btn-circle btn-secondary m-1"><i class="fab fa-twitter"></i></button>
+                                    <button (click)="redSocial('youtube')"  class="btn btn-circle btn-secondary m-1"><i class="fab fa-youtube"></i></button>
+                               
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">describete: </label>
+                                <div class="col-md-12">
+                                    <textarea 
+                                    style="padding-top: 1rem;"
+                                    [(ngModel)]="usuario.descripcion" 
+                                    name="descripcion"
+                                    rows="5" class="form-control form-control-line"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button (click)="actualizar()" class="btn btn-success">actualizar perfi</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+</div>
