@@ -8,15 +8,18 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-6">
-					   <h1 class="text-left titulo">Aquinomas</h1>
+					   <h1 class="text-left titulo"> 
+						 <a [routerLink]="['/posts']" routerLinkActive="active" >Aquinomas</a>
+					   </h1>
 							<!-- <span>entretenimiento</span> -->
 						</div> 
 						 <div class="col-md-6">
 							<div class="contS">
-							   <a><i class="fas fa-search"></i></a>
+							   <a [routerLink]="['/search']">
+								<i class="fas fa-search"></i></a>
 							   <a class="bto" >
 								   <i class="fas fa-envelope"></i>
-								   Suscribe
+								   Suscribirse
 							   </a>
 							   <a  class="nav-aside-close" >
 								   <i class="fas fa-bars"></i>
@@ -25,10 +28,12 @@
 					   </div>
 				   </div>
 					<div class="row menu">
-					   <a href="">Tecnologia</a>
-					   <a href="">Bienestar</a>
+					   <a *ngFor="let cat of categorias" >
+						  {{cat.nombre}}
+					   </a>
+					   <!-- <a href="">Bienestar</a>
 					   <a href="">reviews</a>
-					   <a href="">Ciencia</a>
+					   <a href="">Ciencia</a> -->
 					</div>
 				</div>
 			</div>

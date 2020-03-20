@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PublicComponent } from './public.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { ImageTPipe } from '../../pipes/image-t.pipe';
+
 
 import { ROUTESPUBLIC } from './routes.module';
 import { HeaderComponent } from './shared/header/header.component';
@@ -15,6 +15,7 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { ServicesModule } from 'src/app/services/services.module';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { TextohtmlComponent } from './shared/textohtml/textohtml.component';
+import { BuscarComponent } from './pages/buscar/buscar.component';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { TextohtmlComponent } from './shared/textohtml/textohtml.component';
    PublicComponent,
   HeaderComponent,
   FooterComponent,
-
+  BuscarComponent,
     PrincipalComponent,
     SidebarComponent,
     TextohtmlComponent

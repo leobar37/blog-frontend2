@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BloApiService } from 'src/app/services/posts.service';
 import { IPost } from '../../../../models/blog.interfaces';
 import Swal from 'sweetalert2';
+import { UsuariosService } from '../../../../services/usuarios.service';
 
 @Component({
   selector: 'app-posts',
@@ -10,7 +11,9 @@ import Swal from 'sweetalert2';
 })
 export class PostsComponent implements OnInit {
  public posts : IPost[];
-  constructor(private _blog:BloApiService) {
+  constructor(private _blog:BloApiService,
+     private _us :UsuariosService 
+    ) {
      this.llenarPosts();
   }
 
@@ -18,10 +21,10 @@ export class PostsComponent implements OnInit {
   ngOnInit() {
   }
   llenarPosts(){
-    this._blog.getPosts('5e61d03af5454a398022e385').subscribe( data=>{
+    this._blog.getPosts(this._us.usuario._id).subscribe( data=>{
         if(data)
         this.posts = data;
-
+        
     });
   }
   eliminarPost(id:string){
@@ -36,10 +39,7 @@ export class PostsComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
       this._blog.eliminarPost(id).subscribe( (res: any)=>{       
-        console.log('respuesta');
-        console.log(res);
-        
-        
+    
         if(res.ok){
           this.posts =  this.posts.filter(post =>{
               return post._id != id;

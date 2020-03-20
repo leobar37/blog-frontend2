@@ -72,6 +72,8 @@
               <div class="col-md-12">
                 <div class="form-group m-b-40">
                     <input type="text" 
+                       minlength="25"
+                    required
                     name="titulo"
                      [(ngModel)]="titulo"
                     class="form-control"
@@ -82,20 +84,30 @@
               </div>
               <!-- titulo del post -->
               <!-- categoria del post -->
+              <!-- categoria del post -->
               <div class="col-md-12">
-               <h2 class="titulo">Categoria</h2>
-            </div>
-              <div class="col-md-12">
-                <div class="form-group m-b-40">
-                    <input type="text" 
-                    name="titulo"
-                     [(ngModel)]="categoria"
-                    class="form-control"
-                     placeholder="categoria">
-                    <!-- <span class="bar"></span> -->
-                    <!-- <label for="input1">Categoria</label> -->
-                </div> 
-              </div>
+                <h2 class="titulo">Categoria</h2>
+             </div>
+               <div class="col-md-12">
+                    <form #f="ngForm"
+                     class="floating-labels">
+                        <div class="form-group m-b-40">
+                           <select 
+                           required
+                           class="form-control"
+                           name="titulo"
+                           [(ngModel)]="categoria">
+                           <option 
+                           *ngFor="let cat of categorias"
+                           value="{{cat._id}}">
+                          {{cat.nombre}}
+                         </option>
+                         </select>
+                        </div>
+                    </form>   
+               </div>
+               <!-- categoria del post -->
+        
               <!-- categoria del post -->
        
               <div class="col-md-12">
@@ -119,9 +131,10 @@
                <div class="col-12">
                    <div class="card">
                        <div class="card-body">
-                           <div [froalaEditor]="options2" 
-                           [(froalaModel)]="extracto" >
-                           </div>
+                          <textarea
+                           [(ngModel)]="extracto"
+                           required
+                          class="form-control" style="height:  35vh;" ></textarea>
                        </div>
                    </div>
                </div>
@@ -176,16 +189,9 @@
        
    
        </div>
-      <!-- <div class="col-md-3 col-sm-12">
-         <a 
-         
-         class="btn btn-primary btn-block">
-            <i class="mdi mdi-code-greater-than"></i>
-            ver post
-         </a>  
+      <div class="col-md-3 col-sm-12">
 
-      </div> -->
-    
+          
    </div>
    
 </div>

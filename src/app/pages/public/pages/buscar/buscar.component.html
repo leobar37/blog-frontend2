@@ -1,0 +1,49 @@
+<div class="row mt-4">
+     <div  class="buscarel">
+          <input 
+          #bus
+          (keyup)="buscar(bus)" 
+          type="text" class="form-control">
+          <div class="viewBus">
+            <ul class="list-group">
+                <li
+                 *ngFor="let post of result"
+                class="list-group-item">
+               {{post.title}}    
+            </li>
+                
+              </ul>
+          </div>
+     </div>
+     <div class="col-md-4">
+         <button
+          class="btn btn-success"> 
+             buscar
+         </button>
+     </div>
+</div>
+<div class="container minmd">
+<div class="row mt-4">
+    <div class="col-md-12">
+        <!-- post -->
+    <div class="post post-row postv animated fadeInDown" *ngFor="let post of result; let i = index">
+        <a [routerLink]="['/single' , post._id]" class="post-img"><img
+                [src]="post.images[0].imagenes[0] | image" alt=""></a>
+        <div class="post-body">
+            <div class="">
+                <a class="etiqueta" *ngFor="let key of this.post.keywords">
+                    {{key}}
+                </a>
+            </div>
+            <h3 class="post-title"><a [routerLink]="['/single' , post._id]">{{post.title}}</a></h3>
+            <ul class="post-meta">
+                <li><a>John Doe</a></li>
+                <li>{{post.fechaPublicacion}}</li>
+             </ul>
+                <p> {{post.extracto }} </p>
+         </div>
+    </div>
+    <!-- /post -->
+    </div>
+</div>
+</div>

@@ -1,0 +1,51 @@
+.tag {
+    font-size: 1rem;
+    padding: 0.2rem 0.5rem;
+    margin: 0 0.5rem;
+    color: white;
+    background: red;
+  }
+  /* *{
+  margin: 0;
+  padding: 0;
+  } */
+  .contenedor {
+    margin: 0 3rem;
+  }
+  .postv {
+    /* height: 38.2vh; */
+    overflow: hidden;
+  }
+  .pag {
+    color: red;
+  }
+  /* estilos para el scrollbar */
+  .etiqueta {
+    font-size: 1rem;
+    color: red;
+    font-weight: bold;
+  }
+  .etiqueta:after {
+    content: "-";
+  }
+  .title {
+    font-family: "Roboto", sans-serif;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid red;
+  }
+  
+  
+  /*=============================================
+  =            buscar css            =
+  =============================================*/
+  .buscarel{
+  padding-left:  20%;
+  position: relative;
+  width: 60%;
+  }
+  
+  
+  
+.minmd{
+   min-height: 50vh;
+}

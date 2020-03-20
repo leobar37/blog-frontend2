@@ -1,13 +1,17 @@
 import { Component, OnInit , OnDestroy } from '@angular/core';
 import { BloApiService } from '../../../../services/posts.service';
 import { cargarEstilo, cargarScripts, imgToBase64 ,  getArchivo } from 'src/app/controllers/scripts';
-import { URLBACKEND } from '../../../../keywords/constants';
+import { URLBACKEND, estilosAdminPro, scriptsAdminPro } from '../../../../keywords/constants';
 import { IEntrada, IPost, IrptaEntrada } from '../../../../models/blog.interfaces';
 
 import Swal from 'sweetalert2';
 import { Router , ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Categoria } from '../../../../models/categoria';
+import { CateriaService } from '../../../../services/cateria.service';
+import { dependencias } from '../../../../controllers/scripts';
 declare var $:any;
+declare function adminPro();
 interface HtmlElement extends Event{
   target : HTMLInputElement & EventTarget;
 }
@@ -18,7 +22,9 @@ interface HtmlElement extends Event{
 })
 
 export class EditPostComponent implements OnInit ,  OnDestroy{
-   postBd : IPost ; 
+   postBd : IPost ;
+   categorias:Categoria[] = []; 
+   categoria :string;
   load :boolean  = false;
   imagenes :(ArrayBuffer | string) [] = []
   file : File;
@@ -76,19 +82,39 @@ export class EditPostComponent implements OnInit ,  OnDestroy{
   public editorContent: string = "";
   constructor(private _blog:BloApiService, 
      private router : Router,
+      private _categoria :CateriaService,
       private activ:ActivatedRoute) {
     //  cargarEstilo('assets/plugins/Magnific-Popup-master/dist/magnific-popup.css' , 'epost');
-    //  cargarEstilo('assets/css/pages/user-card.css' , 'epost');
+     cargarEstilo('assets/css/pages/user-card.css' , 'epost');
     //  cargarEstilo('assets/css/pages/floating-label.css' , 'epost')
     //  cargarScripts(scriptsPost , 'epost');
-     let url = URLBACKEND +  '/uploads/tipo/nameImage';
+    _categoria.listarCategorias().subscribe( (data :any ) =>{
+        this.categorias = data.docs;
+    });
+    // //cargar estilos
+    // const depende = async ()=>{
+    //   //  await  cargarEstilo('assets/css/colors/default-dark.css' , 'blank');
+    //   //  await cargarEstilo('assets/css/style.css' , 'blank');
+    //   await  dependencias('all' , estilosAdminPro , scriptsAdminPro);
+    //   this.load = true;
+    //   adminPro();
+    // } 
+    // depende();
+    // //fin 
+    
+    
+    let url = URLBACKEND +  '/uploads/tipo/nameImage';
       activ.params.subscribe( params=>{
           const  {  id }  = params;
            this._blog.getPost(id).subscribe( (data: any) =>{
+             console.log(data);
+             
                if(!data){ 
                }else{
-                 this.postBd =  data.entrada;             
+                 this.postBd =  data.entrada;    
+                  if(this.postBd.images[0])
                    this.imagenes =  this.transformarImagenes(this.postBd.images[0].imagenes);
+                  this.categoria = this.postBd.categoria;
                    this.titulo =  this.postBd.title;
                    this.extracto =  this.postBd.extracto;
                    this.editorContent =  this.postBd.body;
@@ -100,6 +126,7 @@ export class EditPostComponent implements OnInit ,  OnDestroy{
       
      this.imagenes.push(url);
      
+
   }
   
   ngOnInit() {    
@@ -119,9 +146,10 @@ export class EditPostComponent implements OnInit ,  OnDestroy{
           titulo : this.titulo,
           body : this.editorContent,
           extracto : this.extracto ,
-          keywords : this.tags,
+          keywords : this.tags ,
+          categoria : this.categoria
           // fecha :  String(new Date().getTime()),
-          autor : '5e61d03af5454a398022e385'
+          // autor : 
        }  
        observer.next('guardando datos');
        this._blog.editarEntrada(  this.postBd._id , this.post).subscribe((resp:IrptaEntrada) =>{
@@ -131,6 +159,7 @@ export class EditPostComponent implements OnInit ,  OnDestroy{
           observer.next('datos correctamente guardados texto');
           observer.next('guardando imagenes');
           //por corregir
+          // if(this.postBd.images[0])
           this._blog.editarImagenesPost(this.postBd.images[0]._id , this.files).subscribe( (resp :any) =>{
               if(resp.ok){
                  observer.next('imagenes guardadas correctamente');

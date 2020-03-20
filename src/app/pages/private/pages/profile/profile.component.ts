@@ -33,6 +33,8 @@ export class ProfileComponent implements OnInit {
     const iniciarDependencias  = async ()=> {
       await  cargarScripts(this.scripts, 'profile');
       await cargarEstilos(this.link ,'profile');
+      console.log('cargaoron  los script');
+      
         uploadScript();
        this.load = true;
        

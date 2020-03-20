@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --aot --prod" 
   },
   "private": true,
   "dependencies": {
@@ -21,6 +22,7 @@
     "@angular/router": "~8.2.14",
     "@auth0/angular-jwt": "^4.0.0",
     "angular-froala-wysiwyg": "^3.1.0",
+    "express": "^4.17.1",
     "rxjs": "~6.4.0",
     "sweetalert2": "^9.9.0",
     "timeago.js": "^4.0.2",
@@ -47,5 +49,9 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.5.3"
+  },
+  "engines": {
+    "node" :"~12.13.1",
+    "npm" :"~6.12.1"
   }
 }

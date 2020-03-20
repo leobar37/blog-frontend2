@@ -1,0 +1,30 @@
+.editCat{
+    padding-bottom: 2rem;
+}
+
+.editCat .titulo{
+    text-align: center; 
+    padding:  15px 0;
+
+}
+.men{
+  padding-top: 6rem;
+}
+.boton{
+   margin: 0.2rem 0.5rem;  
+}
+.tag{
+    padding: 0.8rem 0.4rem;
+    margin: 0 0.2rem;
+}
+@media screen and (max-width  : 800px){
+    .editCat{
+        padding-bottom: 0rem !important;
+    }
+    .men{
+        padding-top:  0rem !important;
+        padding-bottom: 0.5rem;
+      }
+      
+
+}

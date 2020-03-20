@@ -8,6 +8,7 @@
                         <th>Titulo</th>
                         <th>visitas</th>
                         <th>publicacion</th>
+                        <th>estado</th>
                         <th class="text-nowrap">accion</th>
                     </tr>
                 </thead>
@@ -20,8 +21,12 @@
                             </div>
                         </td>
                         <td>{{post.fechaPublicacion | timeAgo}}</td>
+                        <td>
+                            <small *ngIf="post?.borrador">
+                              borrador
+                            </small>
+                        </td>
                         <td class="text-nowrap">
-                              
                             <a 
                              *ngIf="post._id"
                              data-toggle="tooltip"

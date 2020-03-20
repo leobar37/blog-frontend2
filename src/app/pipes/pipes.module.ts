@@ -6,13 +6,16 @@ import { HtmlPipe } from './html.pipe';
 
 
 
+
 @NgModule({
   declarations: [
+
     ImagePipe,
     TimeAgoPipe,
     HtmlPipe
   ],
   exports :[
+
     ImagePipe,
     TimeAgoPipe,
     HtmlPipe

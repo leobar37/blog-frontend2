@@ -9,7 +9,7 @@ import { UsuariosService } from '../../../../services/usuarios.service';
 export class HeaderComponent implements OnInit {
 
   constructor(
-    private _us:UsuariosService
+    public _us:UsuariosService
   ) { }
 
   ngOnInit() {

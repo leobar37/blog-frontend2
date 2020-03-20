@@ -15,7 +15,14 @@ export class SidebarService {
             { title: "dashboard" , url :'dashboard'},
             { title : "perfil" , url : 'profile'}
          ]
-     }
+     },
+     {
+      title  : 'settings',
+       icono: 'fas fa-cog',
+       items: [
+          { title: "categorias", url : 'categoria'},
+       ]
+   }
   ]
    
   constructor() { }

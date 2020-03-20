@@ -30,7 +30,6 @@ export class UsuariosService {
  loguinNormal(password:string , email:string){
    let url =  URLBACKEND +'/login';
   return this.http.post(url ,  { password , email}).pipe( map( (data : any )  =>{    
-    
     if(data.ok) {   
       this.usuario = data.userBd; 
        this.token = data.token;

@@ -1,13 +1,172 @@
-.tag{
-    font-size: 1rem;
-    padding: 0.2rem 0.5rem;
-    margin:  0  0.5rem;
-    color:  white;
-    background: red;
+.tag {
+  font-size: 1rem;
+  padding: 0.2rem 0.5rem;
+  margin: 0 0.5rem;
+  color: white;
+  background: red;
 }
-.postv{
-   height: 40vh;
-   overflow: hidden; 
+/* *{
+margin: 0;
+padding: 0;
+} */
+.contenedor {
+  margin: 0 3rem;
+}
+.postv {
+  height: 38.2vh;
+  overflow: hidden;
+}
+.pag {
+  color: red;
+}
+/* estilos para el scrollbar */
+.etiqueta {
+  font-size: 1rem;
+  color: red;
+  font-weight: bold;
+}
+.etiqueta:after {
+  content: "-";
+}
+.title {
+  font-family: "Roboto", sans-serif;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid red;
 }
 
-/* estilos para el scrollbar */
+/*=============================================
+=             posts            =
+============================================*/
+/* @import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,500&display=swap'); */
+
+:root {
+  /*theme colors*/
+  --text-gray: #3f4954;
+  --text-light: #686666da;
+  --bg-color: #0f0f0f;
+  --white: #ffffff;
+  --midnight: #104f55;
+  /*gradients*/
+  --sky: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%); /*theme fonts*/
+
+  --roboto: "Roboto", sans-serif;
+}
+/* .posts {
+
+} */
+/* .posts{
+  padding-top: 3rem;
+} */
+.post-content {
+  width: 100%;
+  /* height: 60vh; */
+  /* overflow: hidden; */
+  /* position: relative; */
+  /* margin-bottom: 1rem; */
+  /* position: relative; */
+}
+.posts .post-content > .post-image {
+  padding: 1rem 2rem;
+  position: relative;
+}
+.posts .post-content > .post-title {
+  padding-top: 0rem;
+}
+/* .posts .post-content > .post-image {
+    position: relative;
+} */
+.posts .post-content > .post-image .post-info {
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(to left, #ff5f6d, #ffc371);
+  /* background:-o-linear-gradient(45deg, rgba(248,158,48,1) ); */
+  /* background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);; */
+  border-radius: 3rem;
+  padding: 1rem;
+  left: 10vw;
+}
+.posts .post-content > .post-image .post-info span {
+  font-size: 1rem;
+  font-family: "Roboto", sans-serif;
+  margin: 0 0.3rem;
+}
+.posts .post-content {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.posts .post-content > .post-image > div {
+  overflow: hidden;
+}
+.posts .post-content > .post-image {
+  width: 100%;
+}
+.posts .post-content > .post-image .img {
+  width: 100%;
+  transition: all 1s ease;
+  /* display: none; */
+}
+.posts .post-content > .post-image .img:hover {
+  transform: scale(1.1);
+}
+.posts .post-content > .post-title a {
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  padding-top: 1.3rem;
+  padding-bottom: 0.5rem;
+  display: block;
+}
+.posts .post-content > .post-title {
+  padding-left: 1.6rem;
+}
+.posts .post-content > .post-title p {
+  font-family: "Roboto", sans-serif;
+  line-height: 1.5rem;
+}
+
+/*=============================================
+=            posrt            =
+=============================================*/
+
+.post-d {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.post-d .post {
+  margin: 2rem 1rem;
+  /* -webkit-box-shadow: 6px 5px 15px -4px #000000; 
+  box-shadow: 6px 5px 15px -4px #000000; */
+  width: 18rem;
+}
+.post-d .post .head {
+  overflow: hidden;
+  width: 100%;
+}
+.post-d .post .head img {
+  transition: transform 3s;
+  width: 100%;
+  vertical-align: top;
+}
+.post-d .post .head img:hover {
+  transform: scale(1.5);
+}
+.post-d .post .body {
+  padding: 0 0.6rem;
+}
+.post-d .post .body .titulo {
+  padding-top: 0.8rem;
+}
+.post-d .post .body .titulo h1 {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2rem;
+}
+.post-d .post .body p {
+  font-size: 1rem;
+  line-height: 2rem;
+}
+.btn:hover{
+  cursor: pointer;
+}

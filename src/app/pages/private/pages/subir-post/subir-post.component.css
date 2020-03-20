@@ -68,3 +68,6 @@ a :hover{
 .carousel-control-next{
       background: #000;
 }
+.ng-invalid.ng-touched {
+ border:  2px solid red;     
+}

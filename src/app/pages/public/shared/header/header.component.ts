@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Categoria } from '../../../../models/categoria';
+import { CateriaService } from '../../../../services/cateria.service';
 
 @Component({
   selector: 'app-header',
@@ -6,8 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
+  categorias : Categoria []= [];
+  constructor( private _categoria:CateriaService) { 
+     _categoria.listarCategorias().subscribe( (data: any )  =>{
+      this.categorias = data.docs;         
+       
+     } );
+  }
 
   ngOnInit() {
   }

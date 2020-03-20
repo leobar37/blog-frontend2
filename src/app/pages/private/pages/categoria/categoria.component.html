@@ -1,0 +1,89 @@
+<!-- crear categoria -->
+<div class="card card-body">
+    <div class="row">
+        <div class="col-md-7 col-xs-12 editCat">
+            <h3 class="titulo">Categoria</h3>
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">nombre :</label>
+                    <input
+                    [(ngModel)]="nombre"
+                    name="nombre"
+                    type="text" class="form-control" id="exampleInputEmail1" placeholder="nombre">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Descripcion: </label>
+                    <!-- <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> -->
+                   <textarea
+                   [(ngModel)]="descripcion"
+                   name="descripcion" class="form-control" placeholder="categoria"></textarea>
+                </div>
+                <div class="card">
+                    <div class="car-header">
+                        <input
+                        #tag
+                        (keyup.space)="agregarTag(tag)" 
+                        type="text"  class="form-control" placeholder="escribe tu tags">
+                   
+                     </div>
+                    <div class="card-body">
+                      <div class="tags-default pb-3">
+                          <span
+                          *ngFor="let tag of tags" 
+                          class="tag label label-info"
+                           (click)="eliminarTag(tag)">
+                             {{tag}}
+                              <span data-role="remove"></span>
+                          </span>
+                      </div>
+                    </div>
+                </div>
+                <!-- <button type="submit" class="btn btn-inverse waves-effect waves-light">Cancel</button> -->
+            </form>
+        </div>
+        
+        <div class="col-md-3 col-xs-12 men">
+            <button 
+            (click)="guardarCategoria()"
+            type="button" class="btn btn-primary btn-block waves-effect waves-light m-r-10"> {{ boton}} </button>
+            <button type="button" class="btn btn-danger btn-block waves-effect waves-light m-r-10">Eliminar</button>
+
+        </div>
+    </div>
+    <!-- listar categorias -->
+    <div class="table-responsive">
+        <table class="table color-table success-table text-center">
+            <thead>
+                <tr>
+                    <th>nombre</th>
+                    <th>tags</th>
+                    <th>creacion</th>
+                    <th>ajustes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let categoria of categorias">
+                    <td>{{categoria.nombre}}</td>
+                    <td>
+                    <select class="form-control" name="" id="">
+                         <option 
+                         *ngFor="let tag of categoria.tags" 
+                         value="">{{tag}}</option>
+                    </select>
+                    </td>
+                    <td>{{categoria.date | timeAgo }}</td>
+                    <td class="text-left">
+                        <button (click)="editarCategoria(categoria._id)" class="boton"> <i class="fas fa-edit"></i></button>
+                        <button (click)="eliminarCategoria(categoria._id)" class="boton"><i class="far fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+          
+            </tbody>
+        </table>
+    </div>
+    <!-- listar categorias -->
+
+</div>
+<!-- crear categoria -->
+
+

@@ -32,6 +32,8 @@ import { EditPostComponent } from './pages/edit-post/edit-post.component';
 import { PipesModule } from '../../pipes/pipes.module';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { GuardsModule } from 'src/app/guards/guards.module';
+import { CategoriaComponent } from './pages/categoria/categoria.component';
+import { ServicesModule } from 'src/app/services/services.module';
 
 
 @NgModule({
@@ -45,6 +47,8 @@ import { GuardsModule } from 'src/app/guards/guards.module';
     DashboardComponent,
     ProfileComponent,
     EditPostComponent,
+    PrivateComponent,
+    CategoriaComponent
     
   ],
   imports: [
@@ -54,7 +58,8 @@ import { GuardsModule } from 'src/app/guards/guards.module';
     FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),
     RUTASPRIVATE,
     RouterModule,
-    PipesModule
+    PipesModule,
+    ServicesModule
   ]
 })
 export class PrivateModule { }

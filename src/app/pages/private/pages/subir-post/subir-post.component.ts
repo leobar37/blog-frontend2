@@ -7,6 +7,9 @@ import   Swal from 'sweetalert2';
 import { Observable } from 'rxjs';
 import { IPost } from '../../../../models/blog.interfaces';
 import { URLBACKEND } from '../../../../keywords/constants';
+import { Categoria } from '../../../../models/categoria';
+import { CateriaService } from '../../../../services/cateria.service';
+import { UsuariosService } from '../../../../services/usuarios.service';
 declare var $:any;
 interface HtmlElement extends Event{
   target : HTMLInputElement & EventTarget;
@@ -19,14 +22,28 @@ interface HtmlElement extends Event{
 export class SubirPostComponent implements OnInit  , OnDestroy {
   load :boolean  = false;
   imagenes :(ArrayBuffer | string) [] = []
+  guardar : boolean  = false;
   file : File;
   files : File[]=[];
+  categorias:Categoria[] = []; 
+  categoria : string;
     post:IEntrada; 
   tags  : string[] = [];
    public titulo:string ;
   public options: Object = {
     placeholderText: 'Edita tu contenido aqui',
     charCounterCount: false,
+    imageUploadParam: 'ram',
+    // Set the image upload URL.
+    imageUploadURL: URLBACKEND+'/uploads/ram',
+    // Additional upload params.
+    imageUploadParams: {id: 'my_editor'},
+    // Set request type.
+    imageUploadMethod: 'POST',
+    // Set max image size to 5MB.
+    imageMaxSize: 5 * 1024 * 1024,
+    // Allow to upload PNG and JPG.
+    imageAllowedTypes: ['jpg' , 'gif' , 'png', 'jpeg'],
     toolbarButtons: {
       'moreText': {
         'buttons': ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'textColor', 'backgroundColor', 'inlineClass', 'inlineStyle', 'clearFormatting']
@@ -43,39 +60,33 @@ export class SubirPostComponent implements OnInit  , OnDestroy {
         'buttonsVisible': 2
       }
     } ,
+    events : {
+      'image.uploaded': function (response) {
+        // Image was uploaded to the server.
+        console.log('la imagen se subio correctamente' + response);
+      },
+      'image.replaced': function ($img, response) {
+        console.log('imagen eliminada');
+        
+      },
+    },
     imageResizeWithPercent : true,  
-  }
-  public options2: Object = {
-    placeholderText: 'Edita tu extracto aqui',
-    charCounterCount: false,
-    toolbarButtons: {
-      'moreText': {
-        'buttons': ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'textColor', 'backgroundColor', 'inlineClass', 'inlineStyle', 'clearFormatting']
-      },
-      'moreParagraph': {
-        'buttons': ['alignLeft', 'alignCenter', 'formatOLSimple', 'alignRight', 'alignJustify', 'formatOL', 'formatUL', 'paragraphFormat', 'paragraphStyle', 'lineHeight', 'outdent', 'indent', 'quote']
-      },
-      'moreRich': {
-        'buttons': ['insertLink', 'insertImage', 'insertVideo', 'insertTable', 'emoticons', 'fontAwesome', 'specialCharacters', 'embedly', 'insertFile', 'insertHR']
-      },
-      'moreMisc': {
-        'buttons': ['undo', 'redo', 'fullscreen', 'print', 'getPDF', 'spellChecker', 'selectAll', 'html', 'help'],
-        'align': 'right',
-        'buttonsVisible': 2
-      }
-    } ,
-    imageResizeWithPercent : true,
- 
   }
   public extracto : string  = "";
   public editorContent: string = "";
-  constructor(private _blog:BloApiService) {
+  constructor(private _blog:BloApiService,
+    private _categoria :CateriaService,
+    private _us:UsuariosService
+    ) {
     //  cargarEstilo('assets/plugins/Magnific-Popup-master/dist/magnific-popup.css', 'subpost');
      cargarEstilo('assets/css/pages/user-card.css', 'subpost');
     //  cargarEstilo('assets/css/pages/floating-label.css', 'subpost')
     //  cargarScripts(scriptsPost , 'subpost');
     //  cargarScript('https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js' ,  'fotorama')
-
+    _categoria.listarCategorias().subscribe( (data :any ) =>{
+      this.categorias = data.docs;
+      
+  });
      let url = URLBACKEND +  '/uploads/tipo/nameImage';
      this.imagenes.push(url);
   }
@@ -85,34 +96,56 @@ export class SubirPostComponent implements OnInit  , OnDestroy {
     $('#carousel').carousel()
   }
   ngOnDestroy(){
- 
-    //  elimarPertenencias('fotorama');
+    //guardar en el storage
+    if(this.editorContent.length > 5)
+    Swal.fire({
+      title: '¿desea guardar este post como borrado?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'si, guardar'
+    }).then( (value)=>{
+      if(value){
+        this.titulo = this.titulo  ?  this.titulo : this.titulo = 'borrador';
+        this.guardarContenido(true);   
+      }
+    })
+  
   }
-  guardarContenido(){
+  guardarContenido(borrador ?:boolean){
    let observable = new Observable(observer=>{
-     let valor : boolean  =  this.titulo == '' || this.editorContent.length <  150 ||  this.extracto.length < 80  || this.tags.length < 2 ; 
-      observer.next('verificando errores')
+    let valor : boolean ;
+    if(borrador){ valor = false}
+     else{
+        valor =this.imagenes.length < 2 ||  this.titulo ==  '' || this.editorContent.length <  150 ||  this.extracto.length < 80  || this.tags.length < 2 ; 
+     }
+        observer.next('verificando errores')
       if(!valor){
+        
         this.post = {
+          borrador :  true,
           titulo : this.titulo,
           body : this.editorContent,
           extracto : this.extracto ,
+          categoria  : this.categoria,
           keywords : this.tags,
-          fecha :   new Date().getTime(),
-          autor : '5e61d03af5454a398022e385'
+          fecha : borrador ?  undefined :new Date().getTime(),
+          autor : this._us.usuario._id
        }  
-       observer.next('guardando datos');
+      //  observer.next('guardando datos');
        this._blog.crearEntrada(this.post).subscribe((resp:IrptaEntrada) =>{
-         if(resp.ok){
+         console.log(resp);          
+        if(resp.ok){
           let post : IPost = resp.entrada;
-          console.log(resp);
+          //console.log(resp);
           observer.next('datos correctamente guardados texto');
           observer.next('guardando imagenes');
           this._blog.subirImagenesPost(post._id ,  this.files).subscribe( (resp :any) =>{
               if(resp.ok){
                  observer.next('imagenes guardadas correctamente');
               }else{
-                 observer.error('errr'+resp.error);
+                 observer.error('errr : '+resp.error);
               }
           })
           observer.next('se agreo correctamente el post : '+ post.title);
@@ -129,14 +162,17 @@ export class SubirPostComponent implements OnInit  , OnDestroy {
        }
   
    });
+  
     observable.subscribe( (res :string)  =>{
-      Swal.fire({
-        title :'procesando datos',
-        text :  res ,
-        icon : 'success',
-         allowOutsideClick : false
-      })  
-      Swal.isLoading();
+       if(!borrador){
+        Swal.fire({
+          title :'procesando datos',
+          text :  res ,
+          icon : 'success',
+           allowOutsideClick : false
+        })  
+        Swal.isLoading();
+       }
     }, (err: string) =>{ 
       Swal.fire({
         title :'procesando datos',
@@ -172,13 +208,10 @@ export class SubirPostComponent implements OnInit  , OnDestroy {
        let reader = new FileReader();
         reader.onload =  (event)=>{
            let image:ArrayBuffer | string = reader.result;
-           this.imagenes.push(image);
-           console.log(this.file);
-           
+           this.imagenes.push(image);     
            this.files.push(this.file);
         }
         reader.readAsDataURL(this.file);
-
     }
   }
   eliminarImagen(img:string){

@@ -3,6 +3,7 @@ import { BloApiService } from './posts.service';
 import { SidebarService } from './sidebar.service';
 // import { ScriptLoaderService } from './extras/script.service';
 import { UsuariosService } from './usuarios.service';
+import { CateriaService } from './cateria.service';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { UsuariosService } from './usuarios.service';
   providers : [
      BloApiService,
      SidebarService,
-     UsuariosService
+     UsuariosService,
+     CateriaService
     //  ScriptLoaderService
   ]
 })

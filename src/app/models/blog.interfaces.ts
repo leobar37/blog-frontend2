@@ -11,9 +11,11 @@ export interface IPost {
     body ? :string,
     extracto?:string,
     autor? : Iusuario,
-    fechaPublicacion : string,
+    fechaPublicacion?: string,
     keywords? : string[]
     tipoblog ? : number
+    categoria ? :string
+    borrador ?: boolean
 }
 export interface IEntrada {
     images ? :string[],
@@ -22,11 +24,12 @@ export interface IEntrada {
     titulo :string,
     body ? :string,
     extracto?:string,
-    autor :string,
+    autor ?:string,
     fecha?: number,
     keywords? : string[]
     tipo ? : number,
-    categoria ?: string
+    categoria ?: string,
+    borrador? : boolean
 }
 
 export interface IData{

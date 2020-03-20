@@ -76,4 +76,8 @@ export class BloApiService {
       return  this.http.put(url, formData);    
   
     }
+    buscarPosts(termino :string) {
+      let url = URLBACKEND +'/collecion/entradas/'+termino;
+      return this.http.get(url);
+    }
 }

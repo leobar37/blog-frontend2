@@ -76,6 +76,7 @@
                        <div class="form-group m-b-40">
                            <input type="text" 
                            name="titulo"
+                           
                             [(ngModel)]="titulo"
                            class="form-control"
                            placeholder="inspirate">
@@ -93,13 +94,19 @@
                    <form #f="ngForm"
                     class="floating-labels">
                        <div class="form-group m-b-40">
-                           <input type="text" 
-                           name="titulo"
-                            [(ngModel)]="categoria"
+                           <select 
+                           required
                            class="form-control"
-                            placeholder="categoria">
-                           <!-- <span class="bar"></span> -->
-                           <!-- <label for="input1">Categoria</label> -->
+                           name="titulo"
+                           [(ngModel)]="categoria">
+                           <!-- <option >categorias</option> -->
+                           <option selected="true">seleccione una categoria</option>
+                           <option 
+                          *ngFor="let cat of categorias"
+                          value="{{cat._id}}">
+                         {{cat.nombre}}
+                        </option>
+                        </select>
                        </div>
                    </form>   
               </div>
@@ -126,9 +133,10 @@
                <div class="col-12">
                    <div class="card">
                        <div class="card-body">
-                           <div [froalaEditor]="options2" 
-                           [(froalaModel)]="extracto" >
-                           </div>
+                           <textarea 
+                            class="form-control" style="height: 40vh;"
+                           name="extracto" [(ngModel)]="extracto" >
+                           </textarea>
                        </div>
                    </div>
                </div>
@@ -184,7 +192,7 @@
    
        </div>
        <div class="col-md-3 col-sm-12">
-        <a
+        <a target="_blank"
          [routerLink]="['/single', postBd._id ]" 
         class="btn btn-primary btn-block">
            <i class="mdi mdi-code-greater-than"></i>

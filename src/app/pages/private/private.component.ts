@@ -20,6 +20,7 @@ export class PrivateComponent implements OnInit , OnDestroy {
     adminPro();
   } 
   depende();
+  console.log('cargo componente general');
   
   
 }
