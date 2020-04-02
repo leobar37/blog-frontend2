@@ -12,7 +12,12 @@ import { IPost, IData, IEntrada } from '../models/blog.interfaces';
 export class BloApiService {
    
   constructor(private http : HttpClient) { }
-
+ 
+  getPostsxCantidad(desde : number , hasta : number){
+   let url = URLBACKEND + '/entrada/listar';
+   let params =  new HttpParams().set('desde' , String(desde)).set('hasta' , String(hasta));
+   return  this.http.get(url, { params : params});
+  }
   getPosts(idAutor:string){
      return this.http.get(`${URLBACKEND}/porautor/${idAutor}`).pipe( map ( (data:any) =>{
       let postsPo : IPost[] ; 
@@ -80,4 +85,5 @@ export class BloApiService {
       let url = URLBACKEND +'/collecion/entradas/'+termino;
       return this.http.get(url);
     }
+   
 }

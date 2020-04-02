@@ -18,21 +18,22 @@ declare var $:any;
 export class PostPricipalComponent implements OnInit , OnDestroy{
   public post:IPost;
  public imagenes:string[] = [];
-
+public postR :IPost[] = [];
   @ViewChild('texto',  null) texto :ElementRef; 
   constructor(private _nav:MenuService ,
      private _post:BloApiService ,
       private activRoute :ActivatedRoute) {
-        
-      
-        
+         //related posts
+         _post.getPostsxCantidad(0, 3).subscribe((data: any ) =>{
+             this.postR = data.docs;
+             this.postR[0].fechaPublicacion;
+         });
       }
 
   ngOnInit() {
       let andarDependencias = async ()=>{
           await cargarScript('assets/plugins/jquery/jquery.min.js' ,'fotorama');     
           await  cargarScript('https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js' ,  'fotorama')
-                 
         }
         andarDependencias();
     this.activRoute.params.subscribe( data =>{
@@ -45,14 +46,11 @@ export class PostPricipalComponent implements OnInit , OnDestroy{
    let eliminarDependencias = async ()=>{
     await eliminarScript('assets/plugins/jquery/jquery.min.js' );     
     await  eliminarScript('https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js');
-           
   }
    eliminarDependencias();
   }
   traerPost(id:string){
          this._post.getPost(id).subscribe( ( data : any) =>{
-            
-           
            if(!data.ok)
            console.log('errrrrooorrrrrrrrrrrrrrrr');
            else

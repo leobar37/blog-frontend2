@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 
 import { cargarEstilo, cargarScripts, cargarScript } from '../../../../controllers/scripts';
 import { BloApiService } from 'src/app/services/posts.service';
@@ -19,7 +19,7 @@ interface HtmlElement extends Event{
   templateUrl: './subir-post.component.html',
   styleUrls: ['./subir-post.component.css']
 })
-export class SubirPostComponent implements OnInit  , OnDestroy {
+export class SubirPostComponent implements OnInit  , OnDestroy{
   load :boolean  = false;
   imagenes :(ArrayBuffer | string) [] = []
   guardar : boolean  = false;
@@ -78,26 +78,19 @@ export class SubirPostComponent implements OnInit  , OnDestroy {
     private _categoria :CateriaService,
     private _us:UsuariosService
     ) {
-    //  cargarEstilo('assets/plugins/Magnific-Popup-master/dist/magnific-popup.css', 'subpost');
      cargarEstilo('assets/css/pages/user-card.css', 'subpost');
-    //  cargarEstilo('assets/css/pages/floating-label.css', 'subpost')
-    //  cargarScripts(scriptsPost , 'subpost');
-    //  cargarScript('https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js' ,  'fotorama')
     _categoria.listarCategorias().subscribe( (data :any ) =>{
-      this.categorias = data.docs;
-      
+      this.categorias = data.docs;      
   });
      let url = URLBACKEND +  '/uploads/tipo/nameImage';
      this.imagenes.push(url);
   }
-  
   ngOnInit() {    
     this.load = true;
     $('#carousel').carousel()
   }
   ngOnDestroy(){
-    //guardar en el storage
-    if(this.editorContent.length > 5)
+    if(this.editorContent.length > 5 && !this.guardar)
     Swal.fire({
       title: '¿desea guardar este post como borrado?',
       icon: 'warning',
@@ -116,15 +109,18 @@ export class SubirPostComponent implements OnInit  , OnDestroy {
   guardarContenido(borrador ?:boolean){
    let observable = new Observable(observer=>{
     let valor : boolean ;
-    if(borrador){ valor = false}
+    let borr : boolean;
+    if(borrador){ valor = false , borr= true;}
      else{
         valor =this.imagenes.length < 2 ||  this.titulo ==  '' || this.editorContent.length <  150 ||  this.extracto.length < 80  || this.tags.length < 2 ; 
-     }
+       this.guardar= true;
+       borr= false;
+      }
         observer.next('verificando errores')
+    
       if(!valor){
-        
         this.post = {
-          borrador :  true,
+          borrador : borr,
           titulo : this.titulo,
           body : this.editorContent,
           extracto : this.extracto ,
@@ -162,9 +158,9 @@ export class SubirPostComponent implements OnInit  , OnDestroy {
        }
   
    });
-  
     observable.subscribe( (res :string)  =>{
-       if(!borrador){
+      console.log('data');
+      if(!borrador){
         Swal.fire({
           title :'procesando datos',
           text :  res ,

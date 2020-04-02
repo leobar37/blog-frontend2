@@ -1,0 +1,25 @@
+.tags{
+display: flex;
+flex-direction: row;
+}
+.tags li {
+     padding: 0 0.5rem; 
+}
+.tags li:nth-child(1) {
+    font-weight: bold;
+     
+}
+
+.tags li a::after{
+    content: ",";
+
+}
+#fotorama{
+  margin-bottom: 1rem;
+}
+.contenedor{  
+ margin: 0 7%;
+}
+.primary-button{
+  margin-left: 45%;
+}

@@ -125,37 +125,6 @@
 							</div>
 						</div>
 					</div>
-					<!-- ============================================================== -->
-					<!-- ---------------fin post con relevancia --------------------------- -->
-					<!-- ==============================================================-->
-
-					<!-- <div class="section-title">
-								<h2 class="title">posts recientes</h2>
-							</div> -->
-					<!-- </div> -->
-					<!-- post -->
-					<!-- <div class="col-md-6" *ngFor="let post of postRecientes">
-	<div class="post">
-		<a class="post-img" [routerLink]="['/single' , post._id]"><img [src]="post.images[0].imagenes[0] | image "
-				alt=""></a>
-		<div class="post-body">
-			<div class="post-category" style="background: transparent;">
-				<a class="badge badge-success text-white p-1 m-1" *ngFor="let key of this.post.keywords">
-					{{ key }}
-				</a>
-			</div>
-			<h3 class="post-title"><a [routerLink]="['/single' , post._id]">{{post.title}}</a></h3>
-			<ul class="post-meta">
-				<li><a href="author.html"> {{ post.autor.nombre}} </a></li>
-				<li>{{post.fechaPublicacion}}</li>
-			</ul>
-		</div>
-	</div>
-</div>		 -->
-					<!-- /post -->
-					<!-- ============================================================== -->
-					<!-- --------------------------posts parte baja --------------- -->
-					<!-- ============================================================== -->
 					<div class="post-d">
 						<div class="post" *ngFor="let post of postRecientes">
 							<div class="head">
@@ -171,9 +140,8 @@
 										<a href="">{{post.title}}</a>
 									</h1>
 								</div>
-								<p>
-									{{post.extracto}}
-								</p>
+								<!-- {{post.fechaPublicacion}} -->
+							
 							</div>
 						</div>
 
@@ -201,8 +169,10 @@
 							<li><a>John Doe</a></li>
 							<li>{{post.fechaPublicacion}}</li>
 						</ul>
-
-						<app-textohtml [text]="post.extracto"></app-textohtml>
+                               <p>
+								   {{post.extracto}}
+							   </p>
+					  
 					</div>
 				</div>
 				<!-- /post -->
