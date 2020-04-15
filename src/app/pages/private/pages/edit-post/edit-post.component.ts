@@ -22,17 +22,9 @@ interface HtmlElement extends Event{
 })
 
 export class EditPostComponent implements OnInit ,  OnDestroy{
-   postBd : IPost ;
-   categorias:Categoria[] = []; 
-   categoria :string;
-  load :boolean  = false;
-  imagenes :(ArrayBuffer | string) [] = []
-  file : File;
-  files : File[]=[];
-    post:IEntrada; 
-  tags  : string[] = [];
+   postBd : IPost ; categorias:Categoria[] = [];  categoria :string; load :boolean  = false; imagenes :(ArrayBuffer | string) [] = []; file : File; files : File[]=[]; post:IEntrada;  tags  : string[] = [];
    public titulo:string ;
-  public options: Object = {
+   public options: Object = {
     placeholderText: 'Edita tu contenido aqui',
     charCounterCount: false,
     toolbarButtons: {
@@ -55,28 +47,7 @@ export class EditPostComponent implements OnInit ,  OnDestroy{
 
   
   }
-  public options2: Object = {
-    placeholderText: 'Edita tu extracto aqui',
-    charCounterCount: false,
-    toolbarButtons: {
-      'moreText': {
-        'buttons': ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'textColor', 'backgroundColor', 'inlineClass', 'inlineStyle', 'clearFormatting']
-      },
-      'moreParagraph': {
-        'buttons': ['alignLeft', 'alignCenter', 'formatOLSimple', 'alignRight', 'alignJustify', 'formatOL', 'formatUL', 'paragraphFormat', 'paragraphStyle', 'lineHeight', 'outdent', 'indent', 'quote']
-      },
-      'moreRich': {
-        'buttons': ['insertLink', 'insertImage', 'insertVideo', 'insertTable', 'emoticons', 'fontAwesome', 'specialCharacters', 'embedly', 'insertFile', 'insertHR']
-      },
-      'moreMisc': {
-        'buttons': ['undo', 'redo', 'fullscreen', 'print', 'getPDF', 'spellChecker', 'selectAll', 'html', 'help'],
-        'align': 'right',
-        'buttonsVisible': 2
-      }
-    } ,
-    imageResizeWithPercent : true,
 
-  }
   
   public extracto : string  = "";
   public editorContent: string = "";

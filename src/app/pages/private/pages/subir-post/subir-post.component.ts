@@ -11,6 +11,7 @@ import { Categoria } from '../../../../models/categoria';
 import { CateriaService } from '../../../../services/cateria.service';
 import { UsuariosService } from '../../../../services/usuarios.service';
 declare var $:any;
+declare var Switch:any;
 interface HtmlElement extends Event{
   target : HTMLInputElement & EventTarget;
 }
@@ -20,16 +21,16 @@ interface HtmlElement extends Event{
   styleUrls: ['./subir-post.component.css']
 })
 export class SubirPostComponent implements OnInit  , OnDestroy{
-  load :boolean  = false;
-  imagenes :(ArrayBuffer | string) [] = []
-  guardar : boolean  = false;
-  file : File;
-  files : File[]=[];
-  categorias:Categoria[] = []; 
-  categoria : string;
-    post:IEntrada; 
-  tags  : string[] = [];
-   public titulo:string ;
+  public load :boolean  = false;
+  public imagenes :(ArrayBuffer | string) [] = []
+  public guardar : boolean  = false;
+  public file : File;
+  public files : File[]=[];
+  public categorias:Categoria[] = []; 
+  public categoria : string;
+  public post:IEntrada; 
+  public tags  : string[] = [];
+  public titulo:string ;
   public options: Object = {
     placeholderText: 'Edita tu contenido aqui',
     charCounterCount: false,
@@ -63,10 +64,12 @@ export class SubirPostComponent implements OnInit  , OnDestroy{
     events : {
       'image.uploaded': function (response) {
         // Image was uploaded to the server.
-        console.log('la imagen se subio correctamente' + response);
+         Swal.fire({
+            timer : 1000,
+            icon:'success',
+         })
       },
       'image.replaced': function ($img, response) {
-        console.log('imagen eliminada');
         
       },
     },
@@ -74,20 +77,20 @@ export class SubirPostComponent implements OnInit  , OnDestroy{
   }
   public extracto : string  = "";
   public editorContent: string = "";
-  constructor(private _blog:BloApiService,
+  public galeria :boolean = true;
+   constructor(private _blog:BloApiService,
     private _categoria :CateriaService,
     private _us:UsuariosService
     ) {
-     cargarEstilo('assets/css/pages/user-card.css', 'subpost');
-    _categoria.listarCategorias().subscribe( (data :any ) =>{
-      this.categorias = data.docs;      
-  });
-     let url = URLBACKEND +  '/uploads/tipo/nameImage';
-     this.imagenes.push(url);
-  }
-  ngOnInit() {    
+      _categoria.listarCategorias().subscribe( (data :any ) =>{
+        this.categorias = data.docs;      
+      });
+      let url = URLBACKEND +  '/uploads/tipo/nameImage';
+      this.imagenes.push(url);
+    }
+  async  ngOnInit() {    
     this.load = true;
-    $('#carousel').carousel()
+    await this.iniciar();     
   }
   ngOnDestroy(){
     if(this.editorContent.length > 5 && !this.guardar)
@@ -104,20 +107,27 @@ export class SubirPostComponent implements OnInit  , OnDestroy{
         this.guardarContenido(true);   
       }
     })
-  
   }
+ 
   guardarContenido(borrador ?:boolean){
    let observable = new Observable(observer=>{
     let valor : boolean ;
     let borr : boolean;
     if(borrador){ valor = false , borr= true;}
      else{
-        valor =this.imagenes.length < 2 ||  this.titulo ==  '' || this.editorContent.length <  150 ||  this.extracto.length < 80  || this.tags.length < 2 ; 
-       this.guardar= true;
-       borr= false;
+        if(this.galeria){
+          if(this.files.length < 2 ){ 
+          Swal.fire({
+            icon:'error',
+             text :'no ha incluido las imagenes suficientes'
+          })
+        return;
+        }
+        }
+        valor = this.titulo ==  '' || this.editorContent.length <  150 ||  this.extracto.length < 80  || this.tags.length < 2 ; 
+        borr= false;
       }
-        observer.next('verificando errores')
-    
+      observer.next('verificando errores')
       if(!valor){
         this.post = {
           borrador : borr,
@@ -128,38 +138,40 @@ export class SubirPostComponent implements OnInit  , OnDestroy{
           keywords : this.tags,
           fecha : borrador ?  undefined :new Date().getTime(),
           autor : this._us.usuario._id
-       }  
+        }  
       //  observer.next('guardando datos');
-       this._blog.crearEntrada(this.post).subscribe((resp:IrptaEntrada) =>{
-         console.log(resp);          
+      this._blog.crearEntrada(this.post).subscribe((resp:IrptaEntrada) =>{
         if(resp.ok){
           let post : IPost = resp.entrada;
           //console.log(resp);
           observer.next('datos correctamente guardados texto');
-          observer.next('guardando imagenes');
-          this._blog.subirImagenesPost(post._id ,  this.files).subscribe( (resp :any) =>{
-              if(resp.ok){
-                 observer.next('imagenes guardadas correctamente');
-              }else{
-                 observer.error('errr : '+resp.error);
-              }
-          })
-          observer.next('se agreo correctamente el post : '+ post.title);
+          if(!this.galeria){
+            observer.next('guardando imagenes');
+            this._blog.subirImagenesPost(post._id ,  this.files).subscribe( (resp :any) =>{
+                if(resp.ok){
+                   observer.next('imagenes guardadas correctamente');
+                  }else{
+                    observer.error('errr : '+resp.error);
+                  }
+                })
+           }
+          observer.next('se agrego correctamente el post : '+ post.title);
+          this.guardar= true;
           observer.complete();
           //subir imagenes
-         }else{
-           observer.next('error al guardar datos');
-         }
-         ///recepcionar el post
-        })
-       } else{
-          //swettaler
-        observer.error('existen datos vacios')
-       }
-  
+        }else{
+          observer.next('error al guardar datos');
+        }
+        ///recepcionar el post
+      })
+    } else{
+      //swettaler
+      observer.error('existen datos vacios')
+    }
+    
    });
     observable.subscribe( (res :string)  =>{
-      console.log('data');
+
       if(!borrador){
         Swal.fire({
           title :'procesando datos',
@@ -230,6 +242,25 @@ export class SubirPostComponent implements OnInit  , OnDestroy{
         return tagP != tag ;
      })
   }
+  async iniciar(){
+   await  cargarEstilo('assets/css/pages/user-card.css', 'subpost');
+   await cargarEstilo('assets/plugins/switch/switch.css' ,'subpost');
+   await cargarScript('assets/plugins/switch/switch.js' ,'subpost');
+   //switch para activar o desactivar la galeria de un post
+   let el  =  document.querySelector('.demo');
+  //  $('.drawer').drawer();
+  let options = {
+    size: "default",
+    showText: true,
+    onText: "si",
+    offText: "no",
+    onChange: () => {
+      this.galeria = !this.galeria;
+    },
+  };
+  let switchGaleria = new Switch(el, options);
+   }
+
 }
 
 

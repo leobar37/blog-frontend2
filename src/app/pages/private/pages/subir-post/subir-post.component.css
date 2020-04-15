@@ -4,7 +4,7 @@
      width: 20%;
      padding-bottom: 4px;
      border-bottom: 2px solid black;
-     margin-bottom: 1rem;
+     margin-bottom: 0.5rem;
 }
 
 .tag{
@@ -32,7 +32,6 @@
      width: 4px;
 	height: 3px;
      opacity: 0;
-    
 	overflow: hidden;
 	position: absolute;
 	z-index: -1;
@@ -60,8 +59,11 @@ a :hover{
    padding-top: 1rem;   
 }
 
+.editor{
+     height: 40vh;
+}
 .itm{
-     width: 50%;
+     width: 35%;
      /* height: 12vh; */
 }
 .carousel-control-prev,
@@ -70,4 +72,14 @@ a :hover{
 }
 .ng-invalid.ng-touched {
  border:  2px solid red;     
+}
+.ctrl{
+    display: flex;
+    flex-direction: column;
+     /* border: 2px solid black; */
+}
+.ctrl strong{
+     font-size: 1rem;
+     font-weight: bold;
+    padding-bottom: 0.4rem; 
 }

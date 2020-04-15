@@ -6,6 +6,7 @@ import { IPost } from '../../../../models/blog.interfaces';
 import { URLBACKEND } from 'src/app/keywords/constants';
 import { cargarScript, transformarImagenes } from '../../../../controllers/scripts';
 import { eliminarScript } from 'src/app/controllers/scripts';
+import { WebsocketService } from 'src/app/services/sockets/websocket.service';
 
 
 declare var $:any;
@@ -17,18 +18,20 @@ declare var $:any;
 })
 export class PostPricipalComponent implements OnInit , OnDestroy{
   public post:IPost;
- public imagenes:string[] = [];
-public postR :IPost[] = [];
+  public imagenes:string[] = [];
+  public postR :IPost[] = [];
   @ViewChild('texto',  null) texto :ElementRef; 
-  constructor(private _nav:MenuService ,
+  private idPost:string;
+  
+  constructor(
+     private _nav:MenuService ,
      private _post:BloApiService ,
-      private activRoute :ActivatedRoute) {
-         //related posts
-         _post.getPostsxCantidad(0, 3).subscribe((data: any ) =>{
-             this.postR = data.docs;
-             this.postR[0].fechaPublicacion;
-         });
-      }
+     private _socket : WebsocketService,
+     private activRoute :ActivatedRoute 
+      ){
+      this.postsPorCantidad();
+     this.socketEventos();
+    }
 
   ngOnInit() {
       let andarDependencias = async ()=>{
@@ -52,19 +55,38 @@ public postR :IPost[] = [];
   traerPost(id:string){
          this._post.getPost(id).subscribe( ( data : any) =>{
            if(!data.ok)
-           console.log('errrrrooorrrrrrrrrrrrrrrr');
+          return;
            else
-           this.post = data.entrada;
-           console.log(this.post);
+              this.post = data.entrada;
               let elemento :  HTMLElement =  this.texto.nativeElement;
                elemento.innerHTML =  this.post.body;
               this.imagenes =  transformarImagenes(this.post.images[0].imagenes);
-              // let  $fotoramaDiv:  any =   $('#fotorama').fotorama();
-              // $fotoramaDiv.fotorama();
-              // console.log('la data');
-              // console.log($fotoramaDiv);
+              //aumentar un vista al post
+              const aumentarVista = ()=>{
+                const payload = {
+                   id: id
+                } 
+                 this._socket.emit('visita' , payload , (rpta) =>{
+                  console.log(rpta);
+                 }); 
+              }
+              aumentarVista(); 
          });
   }
+ postsPorCantidad(){
+  this._post.getPostsxCantidad(0, 3).subscribe((data: any ) =>{
+    this.postR = data.docs;
+    this.postR[0].fechaPublicacion;
+});
+ }
+ socketEventos(){
+   //eventos
+  
+  
+
+  
+
+ }
  
 }
 

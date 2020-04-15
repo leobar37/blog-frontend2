@@ -1,21 +1,15 @@
 import { URLBACKEND, ScriptModel, LinkModel } from '../keywords/constants';
-
-
-
  export const cargarEstilo = (styleUrl : string ,atr :string)=>{
     return new Promise( async(resolve, reject) => {
            let bool=await existeEstilo(styleUrl);          
            if(bool) return resolve('existe');
       const styleElement = document.createElement('link');
-        // styleElement.setAttribute(atr , 'generado');
         styleElement.href = styleUrl;
         styleElement.rel = "stylesheet";
         styleElement.onload = resolve;
         document.head.appendChild(styleElement);
       });   
  }
- 
-
 export let cargarScript = (scriptUrl : string , atr :string)=>{
     return  new Promise( async (resolve , reject)=>{
        let bool =  await existeEscript(scriptUrl);
@@ -29,9 +23,9 @@ export let cargarScript = (scriptUrl : string , atr :string)=>{
 
 export let cargarScripts = (scripts : string[] , atr: string) =>{
      return new Promise(async (resolve , reject)=>{
-          for (const script  of scripts){
+         for (const script  of scripts){
                await cargarScript(script , atr);
-        }
+         }
         resolve(scripts);
      });
 } 
@@ -43,7 +37,6 @@ export let cargarEstilos = (estilos: string[] , atr: string) =>{
         resolve(estilos);
      });
 } 
-
 export const existeEscript =  (text : string)=>{
   return new Promise((resolve , reject)=>{
     let scripts :any  =  document.getElementsByTagName('script');
@@ -57,15 +50,13 @@ export const existeEscript =  (text : string)=>{
      resolve(false);
  });
 }
-
 export const existeEstilo =  (text : string)=>{
   return new Promise((resolve , reject)=>{
     let estilos :any =  document.getElementsByTagName('link');
       for (const estilo of estilos) {
          let  link  :HTMLLinkElement= estilo;
-        if( link.href.indexOf(text) > 0){
+        if( link.href.indexOf(text) >  0){
           return resolve(true);
-             // console.log('removio el elemnto ' , src);
         }
      }
      resolve(false);
@@ -78,7 +69,6 @@ export const eliminarScript =  (texto: string)=> {
         for (const script of scripts) {
            let src : HTMLScriptElement = script;
           if(src.src.indexOf(texto) > 0){
-
               body.removeChild(src).onload = resolve  ;
                // console.log('removio el elemnto ' , src);
           }
@@ -101,7 +91,6 @@ export const eliminarEstilo =  (atr: string)=> {
  });
 }
   //convertir una imagen en  base 64
-
 export function imgToBase64(url, callback) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'blob';
@@ -132,8 +121,7 @@ export function  getArchivo(base64 : any , name :string) : File{
   var imagen_firma: File = new File([the_file],  name+'.png', { type: 'image/png' });
   return imagen_firma;
 }
-
-//transforma imagenes
+//agrega urls de la imagnes
 export  function  transformarImagenes(imagenes :string[]):  string []{
   let ruta;
   let imgs: string[]   = [];

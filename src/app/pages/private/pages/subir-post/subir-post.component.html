@@ -1,65 +1,50 @@
+
 <div class="load card">
     <div  class="row galeria">
         <div class="col-md-12">
             <h2 class="titulo">Galeria</h2>
+            <span>Puede incluir una galeria de imagenes</span>
         </div>
-       <div class="col-md-12" style="height: 35vh;">
-        
-              <div class="card-body">
-                  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                      <div class="carousel-inner" style="height: 30vh;" role="listbox">
-                          <div class="carousel-item text-center" style="overflow: hidden;" *ngFor="let image of imagenes" [ngClass]="{'active': image  == imagenes[0]}" > 
-                              <img   class="img-responsive image" [src]="image" alt="First slide">
-                           </div>
-                      </div>
-                      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a>
-                      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
-                  </div>
-             </div>
-           
-        
-       </div>
+ 
        <div class="col-md-12 galery">
           <!-- ============================================================== -->
           <!-- ------------------------- galeria --------------- -->
           <!-- ============================================================== -->
-          <div  *ngIf="load" >
-           <div class="row el-element-overlay">
-               <div class="col-md-3" *ngFor="let image of imagenes">
-                   <div class="el-card-item">
-                       <div class="el-card-avatar el-overlay-1 itm"> 
-                           <img class="imageG" [src]="image" alt="user">
-                           <div class="el-overlay">
-                               <ul class="el-info">
-                                   <li>
-                                        <a (click)=" eliminarImagen(image)" 
-                                        class="btn default btn-outline">
-                                            <i class="fa  fa-cloud-upload">
-                                            </i>
-                                        </a>
-                                   </li>
-                                   <!-- <li><a class="btn default btn-outline" href="javascript:void(0);"><i class="icon-link"></i></a></li> -->
-                               </ul>
-                           </div>
-                       </div>
-                   </div>
-               </div>    
-       
-             
-               <div class="col-md-12 text-left">
-                   <input (change)="manejarImagen($event)" type="file" name="file" id="file" class="inputfile" />
-                    <label for="file">subir imagen</label>
-               </div>
+           <div  *ngIf="load" >
+            <div class="row el-element-overlay">
+                   <div class="mostrargaleria" [hidden]="!galeria">
+                    <div class="col-md-3" *ngFor="let image of imagenes">
+                        <div class="el-card-item">
+                            <div class="el-card-avatar el-overlay-1 itm"> 
+                                <img class="imageG" [src]="image" alt="user">
+                                <div class="el-overlay">
+                                    <ul class="el-info">
+                                        <li>
+                                             <a (click)=" eliminarImagen(image)" 
+                                             class="btn default btn-outline">
+                                                 <i class="fa fa-cloud-upload">
+                                                 </i>
+                                             </a>
+                                        </li>
+                                        <!-- <li><a class="btn default btn-outline" href="javascript:void(0);"><i class="icon-link"></i></a></li> -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <input (change)="manejarImagen($event)" type="file" name="file" id="file" class="inputfile" />
+                    <label for="file">upload</label> 
+                   </div>  
+            
            </div>         
        </div>               
           <!-- ============================================================== -->
           <!-- ---------------fin galeria --------------------------- -->
           <!-- ==============================================================-->
-   
        </div>
    
    </div>
-   
+
    <div class="row">
        <div class="col-md-9 col-sm-12">
    
@@ -72,6 +57,7 @@
               <div class="col-md-12">
                 <div class="form-group m-b-40">
                     <input type="text" 
+                    autocomplete="off" 
                        minlength="25"
                     required
                     name="titulo"
@@ -88,7 +74,7 @@
               <div class="col-md-12">
                 <h2 class="titulo">Categoria</h2>
              </div>
-               <div class="col-md-12">
+               <div class="col-md-3">
                     <form #f="ngForm"
                      class="floating-labels">
                         <div class="form-group m-b-40">
@@ -116,7 +102,7 @@
                <div class="col-12">
                    <div class="card">
                        <div class="card-body">
-                           <div [froalaEditor]="options" [(froalaModel)]="editorContent">
+                           <div [froalaEditor]="options" [(froalaModel)]="editorContent" class="editor">
                            </div>
                        </div>
                    </div>
@@ -171,11 +157,11 @@
            <!-- extracto del post -->
          
            <div class="row">
-              <div class="col-sm-12 col-md-5">
+              <!-- <div class="col-sm-12 col-md-5">
                <button class="btn btn-danger btn-block" >
                    salir
              </button>
-              </div>
+              </div> -->
               <div class="col-md-5">
                <button 
                (click)="guardarContenido()" 
@@ -183,15 +169,14 @@
                       guardar
               </button>
               </div>
-           
            </div>
-            
-       
-   
        </div>
-      <div class="col-md-3 col-sm-12">
-
-          
-   </div>
+      <div class="col-md-2 col-sm-12">
+      <!-- opciones -->
+      <div class="ctrl">
+        <strong>Incluir galeria</strong>
+        <input type="checkbox" class="demo" [(ngModel)]="galeria">
+      </div>
+       </div>
    
 </div>
