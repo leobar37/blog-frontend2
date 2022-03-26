@@ -21,7 +21,7 @@
     "@angular/router": "~8.2.14",
     "@auth0/angular-jwt": "^4.0.0",
     "angular-froala-wysiwyg": "^3.1.0",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "ngx-socket-io": "^3.0.1",
     "rxjs": "~6.4.0",
     "sweetalert2": "^9.9.0",
